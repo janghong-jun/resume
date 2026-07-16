@@ -1,0 +1,237 @@
+/* ==========================================
+   Resume Theme
+========================================== */
+
+:root {
+  --vp-layout-max-width: 1700px;
+
+  --resume-radius: 14px;
+  --resume-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+
+  --resume-border: #e5e7eb;
+}
+
+.dark {
+  --resume-border: #2b2b2b;
+}
+
+/* ==========================================
+   Layout
+========================================== */
+
+.VPDoc.has-aside .content-container {
+  max-width: 1200px;
+}
+
+.vp-doc {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.vp-doc > *:first-child {
+  margin-top: 0;
+}
+
+/* ==========================================
+   Typography
+========================================== */
+
+.vp-doc h1 {
+  font-size: 42px;
+  font-weight: 800;
+  margin: 10px 0 28px;
+  padding-bottom: 14px;
+  border-bottom: 3px solid var(--vp-c-brand);
+}
+
+.vp-doc h2 {
+  margin: 38px 0 18px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.vp-doc h3 {
+  margin: 20px 0 10px;
+  font-size: 20px;
+}
+
+.vp-doc p {
+  margin: 10px 0;
+}
+
+.vp-doc blockquote {
+  border-left: 4px solid var(--vp-c-brand);
+  background: var(--vp-c-bg-soft);
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin: 18px 0;
+}
+
+/* ==========================================
+   Divider
+========================================== */
+
+.vp-doc hr {
+  margin: 40px 0;
+  border: none;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+/* ==========================================
+   Lists
+========================================== */
+
+.vp-doc ul {
+  padding-left: 20px;
+}
+
+.vp-doc li {
+  margin: 6px 0;
+}
+
+/* ==========================================
+   Tables
+========================================== */
+
+.vp-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--resume-shadow);
+}
+
+.vp-doc thead {
+  background: var(--vp-c-brand);
+  color: white;
+}
+
+.vp-doc th {
+  padding: 14px;
+  font-weight: 700;
+}
+
+.vp-doc td {
+  padding: 14px;
+}
+
+.vp-doc tbody tr:nth-child(even) {
+  background: var(--vp-c-bg-soft);
+}
+
+/* ==========================================
+   Project Card
+========================================== */
+
+.vp-doc h2 + p {
+  margin-top: 8px;
+}
+
+.vp-doc h2:not(:first-child) {
+  padding: 20px;
+  background: var(--vp-c-bg-soft);
+
+  border-radius: 14px 14px 0 0;
+
+  border: 1px solid var(--resume-border);
+  border-bottom: none;
+}
+
+.vp-doc h2 + p,
+.vp-doc h2 + ul,
+.vp-doc h2 + table {
+  margin-top: 0;
+}
+
+.vp-doc h2 ~ p,
+.vp-doc h2 ~ ul {
+  border-left: 1px solid var(--resume-border);
+  border-right: 1px solid var(--resume-border);
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.vp-doc h2 ~ hr {
+  border: 1px solid var(--resume-border);
+
+  border-top: none;
+
+  margin-top: 0;
+
+  border-radius: 0 0 14px 14px;
+}
+
+/* ==========================================
+   Badge Style
+========================================== */
+
+.vp-doc li {
+  list-style: none;
+
+  position: relative;
+
+  padding-left: 18px;
+}
+
+.vp-doc li::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 11px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--vp-c-brand);
+}
+
+/* ==========================================
+   Aside
+========================================== */
+
+.VPDocAside {
+  font-size: 14px;
+}
+
+.VPDocAsideOutline {
+  border-left: 2px solid var(--vp-c-divider);
+}
+
+/* ==========================================
+   Navigation
+========================================== */
+
+.VPNavBar {
+  backdrop-filter: blur(12px);
+}
+
+/* ==========================================
+   Images
+========================================== */
+
+.vp-doc img {
+  border-radius: 12px;
+}
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media (max-width: 960px) {
+  .VPDoc.has-aside .content-container {
+    max-width: 100%;
+  }
+
+  .vp-doc h1 {
+    font-size: 32px;
+  }
+
+  .vp-doc h2 {
+    font-size: 24px;
+  }
+}
