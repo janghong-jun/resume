@@ -1,0 +1,1 @@
+import{_ as l,o as e,c as a,a0 as i}from"./chunks/framework.BEwBNf5r.js";const y=JSON.parse('{"title":"👨‍💻 장홍준","description":"","frontmatter":{},"headers":[],"relativePath":"index.md","filePath":"index.md"}'),d={name:"index.md"};function n(r,t,s,g,f,x){return e(),a("div",null,[...t[0]||(t[0]=[i("",112)])])}const h=l(d,[["render",n]]);export{y as __pageData,h as default};
