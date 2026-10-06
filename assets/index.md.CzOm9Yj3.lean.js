@@ -1,0 +1,1 @@
+import{_ as l,o as e,c as i,a0 as a}from"./chunks/framework.Clqjryst.js";const f=JSON.parse('{"title":"??? ��ȫ��","description":"","frontmatter":{},"headers":[],"relativePath":"index.md","filePath":"index.md"}'),d={name:"index.md"};function n(r,t,s,g,o,x){return e(),i("div",null,[...t[0]||(t[0]=[a("",118)])])}const p=l(d,[["render",n]]);export{f as __pageData,p as default};
