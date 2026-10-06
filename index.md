@@ -42,6 +42,7 @@ HTML·CSS 기반의 UI 개발을 시작으로 현재는 **React·TypeScript·Vue
 ## ⚛️ UI Development
 
 - React
+- Next.js
 - TypeScript
 - Vue
 - HTML5
@@ -76,11 +77,12 @@ HTML·CSS 기반의 UI 개발을 시작으로 현재는 **React·TypeScript·Vue
 
 # 💪 핵심 역량
 
-## ⚛️ React · TypeScript 기반 UI 개발
+## ⚛️ React · Next.js · TypeScript 기반 UI 개발
 
-React와 TypeScript를 기반으로 실제 금융·AI 서비스의 UI를 개발하며 현대적인 프론트엔드 개발 환경에 대한 경험을 쌓았습니다.
+React, Next.js, TypeScript 기반의 UI 개발 경험을 바탕으로 현대적인 프론트엔드 개발 환경에 대응하고 있습니다.
 
 - React · TypeScript 기반 화면 개발
+- Next.js 기반 UI 개발
 - 공통 컴포넌트 개발
 - Storybook 기반 컴포넌트 관리
 - Vite 기반 개발 환경 경험
