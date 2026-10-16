@@ -131,8 +131,8 @@
 details b {
   cursor: pointer;
 }
-.VPDoc:not(.has-sidebar) .content[data-v-d3dc3380],
-.VPDoc:not(.has-sidebar) .container[data-v-d3dc3380],
-.VPDoc.has-aside .content-container[data-v-d3dc3380] {
+.VPDoc:not(.has-sidebar) .content,
+.VPDoc:not(.has-sidebar) .container,
+.VPDoc.has-aside .content-container {
   max-width: 100% !important;
 }
