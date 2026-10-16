@@ -1,10 +1,13 @@
 :root {
   --vp-layout-max-width: 1440px;
   --resume-border: var(--vp-c-divider);
+  --vp-font-family-base: --vp-font-family-mono;
 }
 
 .VPDoc.has-aside .content-container {
   max-width: 1100px;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
 }
 
 .vp-doc {
@@ -123,4 +126,13 @@
   .vp-doc h2 {
     font-size: 20px;
   }
+}
+
+details b {
+  cursor: pointer;
+}
+.VPDoc:not(.has-sidebar) .content[data-v-d3dc3380],
+.VPDoc:not(.has-sidebar) .container[data-v-d3dc3380],
+.VPDoc.has-aside .content-container[data-v-d3dc3380] {
+  max-width: 100% !important;
 }
