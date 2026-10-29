@@ -4,7 +4,7 @@
   --vp-font-family-base: --vp-font-family-mono;
 }
 .container{
-  max-width: 100%;
+  max-width: 100% !important;
 }
 
 .VPDoc.has-aside .content-container {
