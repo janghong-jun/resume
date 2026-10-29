@@ -4,11 +4,9 @@
 
 **React · Next.js · TypeScript · Vue · Web Accessibility**
 
-> **"어제보다 조금이라도 더 발전하자."**
-
 13년 이상, 40여 건의 SI 프로젝트를 수행한 UI 개발자입니다. 금융·보험·공공·기업·게임 등 다양한 산업에서 HTML/CSS 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 UI 개발로 영역을 넓혀 왔습니다.
 
-개발 환경 구성부터 공통 컴포넌트 개발, 화면 구현, 코드 품질 관리까지 **혼자서도 끝까지 완성하는 실행력**이 강점입니다.
+프로젝트 초기 환경 구성, 공통 컴포넌트 개발, 웹접근성(KWCAG/WCAG/KRDS) 검수까지 **UI 파트를 단독으로 끝까지 수행한 경험**이 강점입니다.
 
 ---
 
@@ -32,25 +30,27 @@
 - TanStack Router/Query, Storybook 등 UI 개발 기반 설계
 - 공통 컴포넌트 설계, 리팩토링, 코드 품질 관리
 
+### ♿ 웹 접근성과 반응형
+
+- KWCAG/WCAG 기반 시맨틱 마크업, 키보드·스크린리더 대응
+- Lighthouse 기반 접근성 검수 및 점검 결과 장표화, **점검 대상 전 화면 Lighthouse 100점** (한화생명, 경기도교육청, 동양생명)
+- KRDS 적용 공공 서비스, 반응형·모바일 웹, 크로스 브라우징
+
 ### 🏦 금융·보험 도메인 UI
 
 - 은행, 생명·손해보험, 다이렉트 보험, 영업지원 시스템
 - 복잡한 업무 규칙과 다양한 상태를 이해하기 쉬운 화면 구조로 구현
 
-### 👨‍💼 UI 리딩
+### 🎞️ UI 인터랙션 · 애니메이션 · 데이터 바인딩
 
-- 일정·업무 분배 관리, 공통 UI 가이드 및 개발 기준 수립
-- 웹접근성·품질 검수, 기획·디자인·개발 간 협업 조율
+- CSS(transition·animation)와 JavaScript로 UI 인터랙션·애니메이션 직접 구현
+- LLM 입력 상황별 인터랙션 UI 구현 (미래에셋증권 AI Multi Agent)
+- 상태에 따라 달라지는 UI 로직을 공통 컴포넌트로 추상화 (한화생명)
 
-### ♿ 웹 접근성과 반응형
+### 🤝 UI 파트 단독 수행과 개발 가이드
 
-- KWCAG/WCAG 기반 시맨틱 마크업, 키보드·스크린리더 대응
-- KRDS 적용 공공 서비스, 반응형·모바일 웹, 크로스 브라우징
-
-### ⚡ 빠른 적응력
-
-- 기획서·화면설계서·기존 시스템 분석을 통한 빠른 업무 파악
-- 프로젝트별 디자인 시스템과 개발 환경에 맞춘 신속한 UI 구현
+- UI 파트 일정 관리, 공통 UI 가이드 및 개발 기준 수립·운영
+- 웹접근성·품질 검수, 타 파트 개발자 대상 기술·UI 가이드 제공
 
 ---
 
@@ -58,13 +58,13 @@
 
 | 구분          | 기술                                                                                                |
 | :------------ | :-------------------------------------------------------------------------------------------------- |
-| UI 개발       | React 19, Next.js, TypeScript, JavaScript, Vue                                                      |
+| UI 개발       | React 19, Next.js, TypeScript, JavaScript, Vue, Thymeleaf                                           |
 | 스타일링      | HTML5, CSS3, SCSS(Modules), Tailwind CSS                                                            |
-| 컴포넌트·상태 | Storybook, TanStack Router, TanStack Query, Vuetify UI                                              |
+| UI 라이브러리 | shadcn/ui, Radix UI, Vuetify                                                                        |
+| 컴포넌트·상태 | Storybook, TanStack Router, TanStack Query                                                          |
+| 표준·접근성   | 웹 표준, KWCAG, WCAG, KRDS, 시맨틱 HTML, Lighthouse, 키보드·스크린리더 대응, 반응형·모바일 웹       |
 | 환경·도구     | Vite, Node.js, pnpm, npm, Gulp, Git, SVN, ESLint, Prettier, GitHub Actions, GitHub Pages, VitePress |
-| 표준·접근성   | 웹 표준, KWCAG, WCAG, KRDS, 시맨틱 HTML, 키보드·스크린리더 대응, 반응형·모바일 웹                   |
 | 협업          | Jira, Confluence, Figma, PMS                                                                        |
-| 기타          | Thymeleaf                                                                                           |
 
 ---
 
@@ -74,16 +74,19 @@
 
 ### ▶ 한화생명 융자 차세대 시스템 구축
 
-**📅 기간** 2026.05 ~ 2027.01 (진행 중)
+**📅 기간** 2026.05 ~ 2027.01 (진행 중, 2027.01 종료 예정)
 **👨‍💻 역할** React UI 개발 (PA)  
 **📈 기여도** UI 개발 70%
 
 - 프로젝트 초기 개발 환경 구성부터 실무 UI 개발까지 주도
 - 공통 컴포넌트 및 화면 구조 설계·구현, Storybook 기반 컴포넌트 관리
-- 라우팅·서버 상태 관리 기반 구성, 접근성을 고려한 UI 구현
-- 코드 품질 관리 및 리팩토링
+- 라우팅·서버 상태 관리 기반 구성, 접근성을 준수한 UI 구현 및 리팩토링
+- Lighthouse 기반 웹접근성 검수 및 점검 결과 장표화
+- 성과: 상태에 따라 달라지는 UI 로직을 공통 컴포넌트로 추상화·재사용하여 UI 개발 생산성을 높이고, **WBS 기준 개발 일정을 계획 대비 1개월 반 단축** (현 시점 기준)
 
-**🛠 기술** React 19 · TypeScript · Vite · pnpm · TanStack Router/Query · shadcn/ui · Radix UI · Tailwind CSS · Sass Modules · Storybook · ESLint
+<!-- TODO(수치): 공통 컴포넌트 [N]종, 적용 화면 [N]개 -->
+
+**🛠 기술** React 19 · TypeScript · Vite · pnpm · TanStack Router/Query · shadcn/ui · Radix UI · Tailwind CSS · Sass Modules · Storybook · ESLint · Lighthouse
 
 ### ▶ 경기도교육청 하이코칭시스템 구축
 
@@ -91,8 +94,11 @@
 **👨‍💻 역할** UI 개발 (PL)  
 **📈 기여도** UI 개발 100%
 
-- 프로젝트 단독 수행
-- KRDS 적용, 웹접근성 준수, 반응형 UI, Thymeleaf 기반 UI 개발
+- UI 개발 단독 수행 (KRDS 적용, 웹접근성 준수, 반응형 UI, Thymeleaf 기반)
+- Lighthouse 기반 웹접근성 검수 및 점검 결과 장표화
+- 성과: Thymeleaf 기반 화면의 마크업·레이아웃 오류를 개선하고, 웹접근성 점검 대응과 개발자 가이드 제공으로 UI 품질 및 접근성 준수 수준 향상
+
+**🛠 기술** Thymeleaf · HTML/CSS · Lighthouse
 
 ### ▶ 미래에셋증권 AI Multi Agent 프레임워크 구축
 
@@ -100,7 +106,10 @@
 **👨‍💻 역할** React UI 개발 (PL)  
 **📈 기여도** UI 개발 100%
 
-- ChatGPT 스타일 AI 서비스 UI 개발
+- ChatGPT 스타일 생성형 AI 대화 서비스 UI 개발
+- 성과: LLM 입력 상황별 인터랙션 UI를 구현하고, React 경험이 부족한 개발자에게 기술 가이드를 제공해 일정 준수 지원
+
+**🛠 기술** React · Next.js
 
 ### ▶ 동양생명 마이엔젤 서비스 통합 구축
 
@@ -108,7 +117,10 @@
 **👨‍💻 역할** Vue UI 개발 (PA)  
 **📈 기여도** UI 개발 40%
 
-- Vue · Vuetify 기반 컴포넌트 개발, 웹접근성 검수
+- Vue · Vuetify 기반 컴포넌트 개발, Lighthouse 기반 웹접근성 검수 및 장표화
+- 성과: 공통 컴포넌트 제작과 담당 업무 외 팀원 개발 지원으로 개발 효율 향상
+
+**🛠 기술** Vue · Vuetify · Lighthouse
 
 ### ▶ 신한라이프 GA 영업지원시스템
 
@@ -117,6 +129,7 @@
 **📈 기여도** UI 개발 100%
 
 - 모바일 UI 개발 총괄, 일정 관리, 공통 UI 가이드 운영
+- 성과: 모바일 영역 전체를 단독 담당하고, 개발 범위 밖이던 연계 채널까지 추가 대응
 
 ### ▶ 현대해상 다이렉트 고도화
 
@@ -223,11 +236,8 @@
 
 ### 자격증
 
-- **사회복지사 2급** — 한국사회복지사협회 (2020.03)
 - **웹디자인기능사** — 한국산업인력공단 (2008.12)
 - **정보처리기능사** — 한국산업인력공단 (2008.02)
-- **컴퓨터그래픽스운용기능사** — 한국산업인력공단 (2006.07)
-- **워드프로세서 1급** — 대한상공회의소 (2006.02)
 
 ### 교육 이수
 
