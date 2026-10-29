@@ -4,10 +4,11 @@
     "vitepress": "^1.6.4"
   },
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview",
-    "deploy": "pnpm docs:build && gh-pages -d .vitepress/dist"
+    "format": "prettier --write \"**/*.md\"",
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "deploy": "pnpm build && gh-pages -d .vitepress/dist"
   },
   "dependencies": {
     "prettier": "^3.9.10"
