@@ -3,6 +3,9 @@
   --resume-border: var(--vp-c-divider);
   --vp-font-family-base: --vp-font-family-mono;
 }
+.container{
+  max-width: 100%;
+}
 
 .VPDoc.has-aside .content-container {
   max-width: 1100px;
