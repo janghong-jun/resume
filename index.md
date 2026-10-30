@@ -4,7 +4,7 @@
 
 **React · Next.js · TypeScript · Vue · Web Accessibility**
 
-금융·보험·공공·기업·게임 등 다양한 산업 분야에서 40여 건의 SI 프로젝트를 수행한 UI Developer입니다.
+금융·보험·공공·기업·게임 등 다양한 산업 분야에서 40건 이상의 SI 프로젝트를 수행한 UI Developer입니다.
 
 HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 UI 개발까지 업무 영역을 확장해 왔습니다.
 
@@ -20,10 +20,10 @@ HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 U
 
 | 항목 | 내용 |
 | :--- | :--- |
-| 💼 프로젝트 | 44건 |
+| 💼 총 프로젝트 | 40건 이상 |
 | 🏦 금융·보험 | 12건 |
 | 🏛️ 공공 | 8건 |
-| 🏢 일반 기업·기타 | 24건 |
+| 🏢 일반 기업·기타 | 20건 이상 |
 | ⚛️ React | 3건 |
 | 🟢 Vue | 2건 |
 
