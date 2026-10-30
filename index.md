@@ -45,7 +45,7 @@ HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 U
 
 - KWCAG/WCAG 기반 시맨틱 마크업, 키보드·스크린리더 대응
 - Lighthouse 기반 웹 접근성 검수 및 점검 결과 문서화
-- 한화생명·경기도교육청·동양생명 프로젝트의 점검 대상 화면 Lighthouse Accessibility 100점 달성
+- 한화생명·경기도교육청·동양생명 프로젝트의 화면 전체 Lighthouse Accessibility 100점 달성
 - KRDS 적용 공공 서비스, 반응형·모바일 웹 및 크로스 브라우징 대응
 
 ### 🏦 금융·보험 도메인 UI
@@ -136,7 +136,7 @@ HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 U
 **주요 성과**
 - 마크업·레이아웃 오류 개선
 - 웹 접근성 점검 대응 및 UI 개발 가이드 작성
-- 점검 대상 화면 Lighthouse Accessibility 100점 달성
+- 화면 전체 Lighthouse Accessibility 100점 달성
 
 **🛠 기술** Thymeleaf · HTML · CSS · Lighthouse
 
@@ -171,7 +171,7 @@ HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 U
 **주요 성과**
 - 공통 컴포넌트 제작
 - 담당 업무 외 팀원 개발 지원
-- 점검 대상 화면 Lighthouse Accessibility 100점 달성
+- 화면 전체 Lighthouse Accessibility 100점 달성
 
 **🛠 기술** Vue · Vuetify · Lighthouse
 
