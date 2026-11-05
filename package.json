@@ -5,7 +5,7 @@
   },
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
-    "docs:dev": "vitepress dev",
+    "docs:dev": "vitepress dev --open",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
     "deploy": "pnpm docs:build && gh-pages -d .vitepress/dist"
