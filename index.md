@@ -105,7 +105,7 @@ HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 U
 
 - 생성형 AI 대화형 서비스의 UI 개발 전반 단독 수행
 - LLM 입력 상황별 인터랙션 UI를 단독 구현
-- React 경험이 없는 백엔드 개발자 2명에게 데이터 바인딩 위치 가이드를 제공해 UI와 데이터 연동 작업 지원
+- React 경험이 없는 백엔드 개발자 2명에게 데이터 바인딩 가이드를 제공해 UI와 데이터 연동 작업 지원
 
 **🛠 기술** React · Next.js
 
@@ -127,6 +127,7 @@ HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 U
 - 재사용 가능한 공통 컴포넌트 제작
 - 담당 업무 외 팀원 개발 지원으로 UI 개발 업무에 기여
 - 프로젝트 전체 파일 기준 Lighthouse Accessibility 100점 달성
+- 웹 접근성 인증 심사 대응 및 웹 접근성 품질인증 마크 획득
 
 **🛠 기술** Vue · Vuetify · Lighthouse
 
