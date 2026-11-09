@@ -652,12 +652,10 @@ def portfolio_body() -> str:
         + intro_box()
         + h2("프로젝트 수행 현황") + stats_table()
     )
-    # 포트폴리오는 프로젝트별 문제·실행·성과를 상세히 확인하는 문서로 구성한다.
-    recent = sec("대표 사례 | 구조 설계와 개발 효율", featured_cards(0, 1))
-    product = sec("대표 사례 | AI 서비스 UI와 접근성 품질", featured_cards(1, 4))
-    delivery = sec("대표 사례 | 대규모 화면 및 업무 연속성", featured_cards(4, 7))
+    # 대표 프로젝트는 임의의 주제별 섹션으로 나누지 않고 한 흐름으로 보여준다.
+    featured = sec("대표 프로젝트", featured_cards(0, 7))
     all_projects = sec(f"전체 프로젝트 이력 ({count_label()})", project_table())
-    return f"<section class='sec'>{head}</section>" + recent + product + delivery + all_projects
+    return f"<section class='sec'>{head}</section>" + featured + all_projects
 
 
 
