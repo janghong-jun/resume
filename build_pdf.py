@@ -35,7 +35,7 @@ FONT_STACK = (
     "'Malgun Gothic','Apple SD Gothic Neo',sans-serif"
 )
 SECTORS = {"finance": "금융 · 보험", "public": "공공", "enterprise": "일반 기업 · 기타"}
-EXPECTED = {"total": 44, "finance": 12, "public": 8, "enterprise": 24, "react": 3, "vue": 2}
+EXPECTED = {"total": 40, "finance": 12, "public": 8, "enterprise": 24, "react": 3, "vue": 2}
 
 
 # ============================================================== 2. CONTENT
@@ -186,50 +186,38 @@ PROJECTS: tuple[Project, ...] = (
 
 INTRO = (
     "금융·보험·공공·기업·게임 등 다양한 산업 분야에서 **40건 이상의 SI 프로젝트**를 수행한 Frontend UI Developer입니다.",
-    "HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 UI 개발까지 업무 영역을 확장해 왔습니다.",
-    "프로젝트 초기 개발환경 구성부터 공통 컴포넌트 개발, 복잡한 업무 화면 구현, UI 품질 관리, 웹 접근성 기준 준수 및 검수까지 UI 개발 전반을 독립적으로 수행한 경험을 보유하고 있습니다.",
-    "특히 금융·보험 분야의 복잡한 업무 화면을 이해하고, 검색·분류 선택 등 실제 업무 기능을 포함한 재사용 가능한 UI 컴포넌트로 구현하는 데 강점이 있습니다.",
-    "**하루 평균 6~8페이지, 집중 작업 시 하루 최대 20~30페이지**의 화면을 개발하는 생산성을 갖추고 있으며, UI 파트 단독 수행 경험을 바탕으로 주어진 개발 범위를 독립적으로 완성할 수 있습니다.",
-    "최근에는 React 19·TypeScript 기반 프로젝트에서 개발환경 구성, 공통 컴포넌트 설계, 라우팅 및 Storybook 환경 구축을 수행했으며, AI를 활용한 개발환경 구성과 CI/CD 자동화까지 경험을 확장하고 있습니다.",
+    "HTML/CSS 기반 웹 퍼블리싱으로 경력을 시작해 React·TypeScript·Vue 기반 UI 개발로 업무 영역을 확장해 왔습니다.",
+    "프로젝트 초기 개발환경 구성, 공통 컴포넌트 설계, 업무 화면 구현, UI 품질 관리와 웹 접근성 검수까지 UI 개발 전반을 수행합니다.",
+    "반복되는 업무 UI를 재사용 가능한 컴포넌트로 구조화하고, 데이터와 화면 처리 로직을 분리해 확장성과 유지보수성을 높이는 데 강점이 있습니다.",
+    "한화생명 프로젝트에서 공통 컴포넌트 37종을 설계·구현하고 WBS 대비 약 1개월 반의 일정 단축에 기여했으며, 신한라이프 337개 화면의 공통 UI 가이드 적용과 하나은행 250개 화면의 업무 인수 경험을 보유하고 있습니다.",
 )
 
 COMPETENCIES = (
-    ("프론트엔드 UI 개발", ("React·TypeScript·Vue 기반 UI 개발 및 화면 구현",
-     "검색·분류 선택 등 업무 기능을 포함한 공통 컴포넌트 설계 및 개발",
-     "데이터와 UI 로직을 분리한 재사용 가능한 컴포넌트 구조 설계",
-     "Props 기반 컴포넌트 제어 및 상태 관리",
-     "Vite·pnpm·ESLint·Prettier 기반 프로젝트 초기 개발환경 구성",
-     "TanStack Router 기반 라우팅 및 Storybook 기반 컴포넌트 문서화 환경 구성",
-     "기존 코드 분석 및 리팩토링을 통한 UI 코드 품질 관리")),
-    ("공통 컴포넌트 및 개발환경 구성", ("프로젝트 초기 UI 개발환경 및 화면 구조 구성",
-     "공통 컴포넌트 설계·개발 및 재사용 구조 구현", "반복되는 UI 기능의 공통화 및 컴포넌트 관리",
-     "UI 개발 가이드 및 공통 구현 기준 작성", "프로젝트 환경에 맞는 개발 도구 및 라이브러리 구성")),
-    ("웹 접근성 및 반응형 UI", ("KWCAG 2.2 기반 시맨틱 마크업 및 키보드·스크린리더 대응",
-     "웹 접근성 기준 준수 및 접근성 품질 검수", "웹 접근성 인증 심사 대응 및 인증 마크 획득 경험",
-     "Lighthouse 기반 웹 접근성 진단 및 개선, 점검 결과 문서화",
-     "KRDS 적용 공공 서비스 및 반응형·모바일 웹 구현", "크로스 브라우징 및 웹 표준 준수")),
-    ("금융·보험 도메인 UI", ("은행, 생명·손해보험, 다이렉트 보험, 영업지원 시스템 UI 개발",
-     "복잡한 업무 규칙과 다양한 화면 상태를 이해하기 쉬운 UI로 구현",
-     "금융 서비스 모바일 UI 개발 및 공통 UI 가이드 작성", "대규모 금융 프로젝트의 화면 구조 및 개발 히스토리 파악",
-     "담당 채널 업무 인수 및 개발 연속성 확보")),
-    ("UI 인터랙션 및 애니메이션", ("CSS(transition, animation)와 JavaScript를 활용한 UI 인터랙션 및 애니메이션 구현",
-     "마이크로인터랙션을 활용한 UI의 생동감과 사용 경험 향상",
-     "사용자 행동 및 UI 상태 변화에 따른 인터랙션 설계와 구현",
-     "재사용 가능한 애니메이션 인터랙션 공통 컴포넌트 구현 (한화생명)",
-     "LLM 입력 상황별 인터랙션 UI 구현 (미래에셋증권 AI Multi Agent)")),
-    ("다국어·다국가 UI 대응", ("i18n·l10n 기반 다국어·다국가 서비스 UI 구현", "언어 전환 및 다국어 텍스트 처리",
-     "한글·영문 혼합, 이모지 등 다양한 문자 조합 대응", "언어별 텍스트 길이와 표현 차이를 고려한 UI 레이아웃 대응")),
-    ("UI 파트 단독 수행 및 개발 가이드", ("UI 파트 단독 수행 및 화면 개발 전반 담당",
-     "프로젝트 초기 UI 개발환경 및 화면 구조 구성", "공통 UI 가이드 및 개발 기준 작성",
-     "웹 접근성·UI 품질 검수 및 UI 구현 가이드 제공", "담당 UI 영역의 작업 범위 및 일정 관리",
-     "프로젝트 참여자 대상 UI 구현 관련 기술 지원 (백엔드 개발자 대상 데이터 바인딩 가이드 등)")),
-    ("화면 개발 생산성 및 일정 관리", ("하루 평균 6~8페이지, 집중 작업 시 하루 최대 20~30페이지 개발",
-     "다수의 화면을 동시에 진행하는 SI 프로젝트의 작업 범위 및 우선순위 관리",
-     "UI 파트 단독 수행 시 화면 구현부터 품질 검수까지 독립적으로 진행",
-     "공통 컴포넌트와 UI 가이드 활용을 통한 반복 작업 감소 및 개발 효율 개선")),
-    ("AI 활용 및 개발 자동화", ("AI를 활용한 개인 온라인 이력서 개발 및 개발환경 구성",
-     "VitePress 기반 정적 사이트 빌드 및 GitHub Pages 배포 환경 구성",
-     "AI의 도움을 받아 GitHub Actions CI/CD 워크플로 작성·개선", "GitHub Pages 자동 배포 환경 구축")),
+    ("UI 구조 설계 및 개발환경 구성", ("React·TypeScript·Vue 기반 UI 개발 및 화면 구현",
+     "프로젝트 초기 개발환경·라우팅·컴포넌트 관리 환경 구성",
+     "공통 컴포넌트 설계 및 데이터와 UI 처리 로직 분리",
+     "기존 코드 분석, 오류 수정 및 UI 구조 개선",
+     "Storybook 기반 컴포넌트 관리 및 UI 개발 가이드 작성")),
+    ("업무 UI 구현 및 도메인 이해", ("은행·생명보험·손해보험·영업지원 시스템 등 금융 UI 개발",
+     "검색·분류 선택 등 업무 로직을 포함한 컴포넌트 구현",
+     "복잡한 업무 규칙과 화면 상태를 사용자 관점의 UI로 구현",
+     "대규모 프로젝트의 화면 구조와 개발 히스토리 파악 및 업무 인수")),
+    ("웹 접근성 및 UI 품질", ("KWCAG 2.2 기반 시맨틱 마크업 및 키보드·스크린리더 대응",
+     "Lighthouse 기반 접근성 진단·개선 및 결과 문서화",
+     "웹 접근성 인증 심사 대응 및 품질인증 마크 획득 경험",
+     "KRDS 적용 공공 서비스, 반응형·모바일 UI 및 크로스 브라우징")),
+    ("인터랙션 및 사용자 경험", ("CSS transition·animation과 JavaScript를 활용한 UI 인터랙션",
+     "마이크로인터랙션을 활용한 상태 변화 및 사용자 피드백 구현",
+     "재사용 가능한 애니메이션 인터랙션 구현 (한화생명)",
+     "LLM 대기·스트리밍·오류 등 상태별 대화형 UI 구현 (미래에셋증권)")),
+    ("독립 수행 및 협업", ("UI 파트 단독 수행 및 화면 구현부터 품질 검수까지 담당",
+     "담당 UI 범위·우선순위·일정 관리 및 추가 요청 대응",
+     "백엔드 개발자 대상 데이터 바인딩 위치와 UI 연동 방식 안내",
+     "하루 평균 6~8페이지, 집중 작업 시 최대 20~30페이지 개발")),
+    ("AI 활용 및 개발 자동화", ("AI를 코드 작성 보조와 오류 분석·개선 과정에 활용",
+     "AI 도움을 받아 GitHub Actions CI/CD 워크플로 작성·개선",
+     "VitePress 기반 개인 온라인 이력서 구성 및 GitHub Pages 자동 배포",
+     "생성된 코드와 설정을 직접 검토·수정하고 프로젝트 환경에 맞게 적용")),
 )
 STACK = (
     ("UI 개발", "React, Next.js, TypeScript, JavaScript, Vue, Thymeleaf"),
@@ -242,7 +230,7 @@ STACK = (
     ("환경·도구", "Vite, Node.js, pnpm, npm, Gulp, Git, SVN, ESLint, Prettier"),
     ("빌드·배포", "GitHub Actions, GitHub Pages, VitePress, gh-pages"),
     ("협업", "Jira, Confluence, Figma, PMS"),
-    ("AI 활용", "AI 기반 코드 작성 지원, CI/CD 워크플로 구성 및 개선"),
+    ("AI 활용", "AI 기반 코드 작성 보조·오류 분석, CI/CD 워크플로 구성 및 개선"),
 )
 CAREER = (
     ("2022.12 ~ 현재", "네티브", "React·TypeScript 기반 UI 개발, 공통 컴포넌트 설계 및 구현, 프로젝트 개발환경 구성"),
@@ -275,33 +263,27 @@ RESUME_ENV = ("**Markdown** 기반 콘텐츠 작성 및 관리", "**pnpm** 기�
               "**gh-pages**를 활용한 배포 스크립트 구성")
 COVER_QUOTE = "좋아하는 일을 오래도록 잘하고 싶습니다."
 COVER_LEAD = (
-    "한화생명 융자 차세대 프로젝트에서 반복되는 업무 UI를 **공통 컴포넌트 37종(업무 로직 포함 7종)**으로 정리하고 UI와 처리 로직을 분리해, "
-    "**WBS 대비 약 1개월 반 일정을 단축**했습니다. 이 과정에서 재사용 가능한 컴포넌트 설계 역량을 쌓았고, "
-    "이를 앞으로 참여하는 프로젝트에서도 바로 활용해 UI 개발의 속도와 품질에 기여하고 싶습니다."
+    "다양한 산업의 SI 프로젝트에서 쌓은 UI 개발 경험을 바탕으로, 요구사항을 정확히 파악하고 안정적인 화면 구조와 재사용 가능한 컴포넌트로 구현하는 개발자입니다. "
+    "기술을 적용하는 데 그치지 않고 반복 업무를 구조화하고 UI 품질을 높여 프로젝트 결과에 기여해 왔습니다."
 )
 COVER_LETTER = (
-    ("좋아하는 일을 오래도록, 웹UI개발을 계속하는 이유", (
-        "학창 시절부터 웹이라는 분야를 꿈꿔왔습니다. 제가 직접 만들고 구현한 결과물이 웹이라는 공간에서 살아 움직이는 과정에 매력을 느꼈고, 그렇게 시작한 일이 어느덧 제 직업이자 삶의 중요한 부분이 되었습니다.",
-        "몸이 좋지 않아 힘든 시간을 보낸 적도 있지만, 좋아하는 일을 계속할 수 있다는 사실이 다시 일어설 수 있는 힘이 되어주었습니다. 매일 무언가를 만들고 조금씩 발전해 나간다는 것은 단순한 직업적 만족을 넘어 제가 살아 있음을 느끼게 해주는 일이었습니다.",
-        "웹UI개발은 저에게 재미와 적성, 성취감을 모두 주는 일입니다. 오랜 시간 해왔지만 여전히 더 잘하고 싶고, 어제보다 조금이라도 더 나은 결과물을 만들자는 마음으로 꾸준히 성장해 왔습니다.",
+    ("지원동기 | 사용자에게 필요한 UI를 완성하는 개발자", (
+        "웹은 기획과 디자인의 의도를 실제 사용자가 경험하는 결과물로 연결하는 분야라는 점에서 매력을 느껴 시작했습니다. HTML/CSS 기반 퍼블리싱으로 경력을 쌓은 뒤 React·TypeScript·Vue 등 새로운 기술을 프로젝트에 적용하며 UI 개발 역량을 확장해 왔습니다.",
+        "다양한 산업의 프로젝트를 경험하며 중요한 것은 특정 기술을 사용하는 데 그치지 않고, 업무와 사용자의 맥락을 이해해 안정적이고 일관된 UI로 구현하는 것임을 배웠습니다. 앞으로도 기본기를 바탕으로 새로운 기술을 익히고, 실제 서비스의 완성도에 기여하고자 합니다.",
     )),
-    ("40건 이상의 프로젝트로 검증한 UI 개발 전문성과 생산성", (
-        "HTML/CSS 기반 웹 퍼블리싱으로 시작해 React·TypeScript·Vue 기반 UI 개발까지 역량을 넓히며, 금융·보험·공공·기업·게임 등 다양한 분야에서 **40건 이상의 SI 프로젝트**를 수행했습니다.",
-        "특히 금융·보험 분야의 복잡한 업무 화면과 상태를 이해하기 쉬운 UI로 구현하는 데 강점이 있습니다. 프로젝트 초기 환경 구성부터 공통 컴포넌트 설계, 화면 개발, 품질 검수까지 UI 개발 전반을 수행해 왔습니다.",
-        "여기에 **하루 평균 6~8페이지, 집중 작업 시 하루 최대 20~30페이지**의 화면을 개발하는 생산성을 갖추고 있습니다. 이 작업 속도를 바탕으로 UI 파트를 단독으로 맡은 프로젝트에서도 개발 범위와 일정을 관리하며 화면 구현부터 품질 검수까지 담당해 왔습니다.",
+    ("업무역량 | UI 구조화와 독립적인 실행", (
+        "프로젝트 초기 개발환경 구성부터 공통 컴포넌트 설계, 화면 구현, 품질 검수까지 UI 개발 전반을 수행해 왔습니다. 금융·보험 분야의 복잡한 업무 규칙과 다양한 화면 상태를 이해하고, 검색·분류 선택 등 업무 기능을 포함한 컴포넌트로 구현하는 데 강점이 있습니다.",
+        "한화생명 융자 차세대 시스템에서는 React 19·TypeScript·Vite 기반 환경과 라우팅·Storybook 구성을 마련하고, 공통 컴포넌트 37종을 설계·구현했습니다. 데이터와 UI 처리 로직을 분리해 여러 화면에서 재사용할 수 있는 구조를 만들었으며 WBS 대비 약 1개월 반의 일정 단축에 기여했습니다.",
     )),
-    ("재사용 가능한 공통 컴포넌트와 개발 생산성", (
-        "한화생명 융자 차세대 시스템에서 React 19·TypeScript·Vite·pnpm 기반 개발환경을 구성하고, TanStack Router 라우팅과 Storybook 컴포넌트 관리 환경을 마련했습니다.",
-        "검색·분류 선택 등 업무 기능이 반복되는 화면에서 **공통 컴포넌트 37종(업무 로직 포함 7종)**을 설계·구현했습니다. **데이터와 UI 처리 로직을 분리**하고 외부 데이터 주입만으로 여러 화면에서 재사용할 수 있도록 구성해 후속 UI 개발 기반을 마련했으며, **WBS 기준 개발 일정 약 1개월 반 단축**에 기여했습니다.",
+    ("문제 해결 | 품질과 개발 연속성 확보", (
+        "신한라이프 GA 영업지원시스템에서는 모바일 UI 영역을 단독으로 담당하고 337개 화면에 공통 UI 가이드를 적용했습니다. 담당 범위 외 연계 채널 3개를 추가로 대응하면서도 계획된 일정 내 개발을 마무리했습니다.",
+        "하나은행 원큐 리뉴얼에서는 담당 채널의 리더 교체로 발생한 업무 공백을 인수해 250개 화면의 UI 개발을 이어갔습니다. 기존 화면 구조와 개발 히스토리를 파악하고 담당 화면 외 작업도 지원해 개발 연속성 확보에 기여했습니다.",
+        "KWCAG 2.2를 고려한 시맨틱 마크업과 키보드·스크린리더 대응을 실무에 적용해 왔으며, 한화생명·경기도교육청·동양생명 프로젝트에서 Lighthouse Accessibility 100점을 달성했습니다. 동양생명 프로젝트에서는 웹 접근성 인증 심사에 대응해 품질인증 마크를 획득했습니다.",
     )),
-    ("웹 접근성과 사용자 중심 품질 관리", (
-        "KWCAG 2.2 기반 시맨틱 마크업과 키보드·스크린리더 대응을 고려해 UI를 구현하고, 공공 서비스에는 KRDS를 적용해 왔습니다.",
-        "한화생명·경기도교육청·동양생명 프로젝트에서 Lighthouse 접근성 검수와 결과 문서화를 수행했으며, 세 프로젝트 모두 프로젝트 전체 파일 기준 **Accessibility 100점**을 달성했습니다. 경기도교육청 프로젝트에서는 마크업·레이아웃 오류를 개선하고 웹 접근성 점검 대응 및 UI 개발 가이드를 작성했으며, 하나은행 원큐 리뉴얼에서는 프로젝트 전체 화면을 대상으로 aria 속성을 추가해 접근성을 개선했습니다.",
-    )),
-    ("변화에 배우고 적응하는 개발자", (
-        "AI의 발전으로 웹UI개발자의 역할과 일하는 방식이 빠르게 변하고 있습니다. 앞으로 어떤 역량이 필요해질지 장담할 수는 없고, 저 역시 아직 배워야 할 것이 많습니다. 그렇지만 변화가 두렵다고 이 일을 놓고 싶지는 않습니다. 변화하는 환경에 맞춰 배우고 적응하면서 좋아하는 일을 계속해 나가고 싶습니다.",
-        "미래에셋증권 AI Multi Agent 프레임워크 구축에서는 생성형 AI 대화 서비스 UI를 단독으로 개발하고 LLM 입력 상황별 인터랙션을 구현했으며, React 경험이 없는 백엔드 개발자 2명에게 데이터 바인딩 가이드를 제공해 UI와 데이터 연동 작업을 지원했습니다. 개인 온라인 이력서는 VitePress로 구성하고, AI의 도움을 받아 GitHub Actions CI/CD 워크플로를 작성·개선해 GitHub Pages 자동 배포 환경을 구축했습니다.",
-        "앞으로도 기본을 소홀히 하지 않고 새로운 기술을 꾸준히 익히며, 맡은 일을 책임감 있게 완성하는 개발자로 남고 싶습니다. 좋아하는 일을 오래도록 잘하는 것, 그것이 제가 웹UI개발을 계속하고 싶은 이유입니다.",
+    ("입사 후 목표 | 기본기와 자동화를 함께 발전시키는 개발자", (
+        "입사 후에는 먼저 서비스의 구조와 업무 흐름, 개발 규칙을 빠르게 파악하고 팀의 기준에 맞춰 안정적으로 결과물을 내겠습니다. 반복되는 UI와 공통 기능은 재사용 가능한 구조로 정리하고, 접근성과 사용성을 함께 고려해 유지보수하기 좋은 UI를 구현하겠습니다.",
+        "AI는 코드 작성 보조와 오류 분석, 개발 자동화에 활용하되 결과를 그대로 적용하기보다 직접 검토하고 프로젝트 환경에 맞게 개선하겠습니다. 개인 온라인 이력서를 VitePress로 구성하고 GitHub Actions·GitHub Pages 배포 자동화를 구축한 경험을 바탕으로 개발 과정의 반복 작업도 꾸준히 개선하겠습니다.",
+        "어제보다 조금이라도 더 나은 결과물을 만든다는 기준으로 기본기를 지키면서 새로운 기술을 익히고, 맡은 업무를 끝까지 책임지는 UI 개발자로 기여하겠습니다.",
     )),
 )
 
@@ -309,11 +291,11 @@ COVER_LETTER = (
 # ============================================================== 3. STYLE
 CSS = r"""
 :root {
-  --ink: #1e293b; --ink-strong: #0f172a; --muted: #64748b; --sub: #475569;
-  --line: #e2e8f0; --surface: #f8fafc; --surface-2: #f1f5f9;
-  --accent: #2563eb; --accent-ink: #1d4ed8; --accent-soft: #eff6ff; --accent-on-dark: #60a5fa;
-  --chip-bg: #eef2ff; --chip-ink: #3730a3; --chip-line: #c7d2fe;
-  --ok: #16a34a; --ok-ink: #15803d; --ok-soft: #f0fdf4;
+  --ink: #334155; --ink-strong: #1f2937; --muted: #64748b; --sub: #475569;
+  --line: #d7e5f2; --surface: #f7fbff; --surface-2: #eaf3ff;
+  --accent: #2878e5; --accent-ink: #334155; --accent-soft: #eef6ff; --accent-on-dark: #fff;
+  --chip-bg: #f3f6fa; --chip-ink: #475569; --chip-line: #dbe3ec;
+  --ok: #12a594; --ok-ink: #334155; --ok-soft: #effaf7;
   --font: __FONT__;
 }
 @page {
@@ -325,7 +307,7 @@ CSS = r"""
 * { box-sizing: border-box; }
 html { font-size: 8.5pt; }
 body {
-  font-family: var(--font); font-size: 8.5pt; line-height: 1.42; color: var(--ink);
+  font-family: var(--font); font-size: 8.7pt; line-height: 1.46; color: var(--ink);
   margin: 0; word-break: keep-all; overflow-wrap: break-word;
   -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
@@ -340,34 +322,39 @@ p { margin: 0 0 4px; orphans: 3; widows: 3; }
 
 .banner {
   display: flex; justify-content: space-between; align-items: flex-end; gap: 10px;
-  background: var(--ink-strong); color: #fff; padding: 10px 14px;
-  border-radius: 5px; margin-bottom: 8px; break-inside: avoid;
+  background: linear-gradient(110deg, #2878e5 0%, #4567d9 58%, #6657cc 100%);
+  color: #fff; padding: 12px 16px;
+  border-radius: 6px; margin-bottom: 9px; break-inside: avoid;
 }
 .banner .t { font-size: 17pt; font-weight: 700; line-height: 1.2; }
 .banner .s { font-size: 8.7pt; font-weight: 700; color: var(--accent-on-dark); margin-top: 2px; }
-.banner .meta { font-size: 7.5pt; color: #cbd5e1; text-align: right; line-height: 1.35; }
+.banner .meta { font-size: 7.5pt; color: #fff; text-align: right; line-height: 1.4; }
 .summary {
-  background: var(--accent-soft); border-left: 3px solid var(--accent);
-  padding: 6px 10px; margin-bottom: 7px;
+  background: linear-gradient(100deg, #eff7ff 0%, #f6f9ff 100%);
+  border-left: 3px solid var(--accent);
+  padding: 7px 11px; margin-bottom: 8px;
 }
 .summary p { margin: 0 0 3px; }
 .summary p:last-child { margin-bottom: 0; }
 h2 {
-  font-size: 11.2pt; font-weight: 700; color: var(--ink-strong);
-  margin: 10px 0 5px; padding: 1px 0 1px 8px;
+  font-size: 11.5pt; font-weight: 700; color: var(--ink-strong);
+  margin: 12px 0 6px; padding: 3px 8px;
+  background: linear-gradient(90deg, #edf5ff 0%, #f8fbff 70%, #fff 100%);
   border-left: 3px solid var(--accent);
   break-after: avoid; page-break-after: avoid;
 }
 h3 {
-  font-size: 9.2pt; font-weight: 700; color: var(--accent-ink);
+  font-size: 9.2pt; font-weight: 700; color: var(--ink-strong);
   margin: 0 0 3px; break-after: avoid; page-break-after: avoid;
 }
 .sec { break-inside: auto; page-break-inside: auto; }
+.sec.keep { break-inside: avoid; page-break-inside: avoid; }
 .sec > h2 { break-after: avoid; page-break-after: avoid; }
 
 .card {
-  border: 1px solid var(--line); border-radius: 4px; padding: 5px 8px;
-  margin: 0 0 5px; background: #fff; font-size: 7.8pt; line-height: 1.34;
+  border: 1px solid var(--line); border-left: 2px solid #8fc1f4;
+  border-radius: 5px; padding: 7px 10px;
+  margin: 0 0 6px; background: #fff; font-size: 8.1pt; line-height: 1.4;
   break-inside: avoid; page-break-inside: avoid;
 }
 .card .head {
@@ -393,7 +380,7 @@ h3 {
 }
 .result .lab { color: var(--ok-ink); margin-top: 0; }
 .badge {
-  display: inline-block; background: #dcfce7; color: var(--ok-ink);
+  display: inline-block; background: #dcfce7; color: var(--ink-strong);
   border-radius: 3px; font-size: 7pt; font-weight: 700; padding: 0 4px; margin-left: 5px;
 }
 .note { font-size: 7.6pt; margin: -1px 0 5px; break-after: avoid; page-break-after: avoid; }
@@ -412,7 +399,8 @@ h3 {
 .grid tr { break-inside: avoid; page-break-inside: avoid; }
 .grid td {
   width: 50%; vertical-align: top; border: 1px solid var(--line);
-  border-radius: 4px; padding: 5px 8px; font-size: 7.5pt; line-height: 1.36;
+  border-top: 2px solid #8fc1f4; border-radius: 4px;
+  padding: 6px 8px; font-size: 7.5pt; line-height: 1.36;
 }
 .grid td h3 { font-size: 8.9pt; margin-bottom: 3px; }
 .grid td.cols { width: 100%; }
@@ -421,16 +409,16 @@ h3 {
 table.kv { width: 100%; border-collapse: collapse; }
 table.kv tr { break-inside: avoid; page-break-inside: avoid; }
 table.kv td { padding: 2.5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
-table.kv td:first-child { width: 24%; font-weight: 700; color: var(--ink-strong); background: var(--surface); }
-table.list { width: 100%; border-collapse: collapse; font-size: 7.4pt; line-height: 1.22; }
-table.list th { background: var(--ink-strong); color: #fff; text-align: left; padding: 3px 6px; font-weight: 700; }
-table.list td { padding: 1.7px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.kv td:first-child { width: 24%; font-weight: 700; color: var(--accent-ink); background: var(--surface-2); }
+table.list { width: 100%; border-collapse: collapse; font-size: 7.7pt; line-height: 1.3; }
+table.list th { background: linear-gradient(90deg, #2878e5, #4567d9); color: #fff; text-align: left; padding: 4px 6px; font-weight: 700; }
+table.list td { padding: 2.5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
 table.list tbody tr:nth-child(even) td { background: var(--surface); }
 table.list thead { display: table-header-group; }
 table.list tr { break-inside: avoid; page-break-inside: avoid; }
 
 .env-panel {
-  background: #f8fafc; border: 1px solid #cbd5e1; border-left: 3px solid var(--accent);
+  background: #f1f9ff; border: 1px solid #cfe4f4; border-left: 3px solid var(--accent);
   border-radius: 4px; margin: 7px 0 9px; padding: 6px 9px; break-inside: avoid;
 }
 .env-panel h3 { color: var(--ink-strong); margin-bottom: 3px; font-size: 8.8pt; }
@@ -444,7 +432,11 @@ table.list tr { break-inside: avoid; page-break-inside: avoid; }
   margin-bottom: 7px; break-inside: avoid; page-break-inside: avoid;
 }
 .qa h3 { font-size: 9.6pt; margin-bottom: 4px; }
-.qa h3 .no { display: inline-block; margin-right: 7px; color: var(--accent); font-weight: 700; }
+.qa h3 .no {
+  display: inline-block; width: 17px; height: 17px; line-height: 17px;
+  margin-right: 7px; border-radius: 50%; background: #e7f2ff;
+  color: var(--accent-ink); text-align: center; font-size: 7.5pt; font-weight: 700;
+}
 .qa p { margin: 0 0 5px; text-align: justify; line-height: 1.48; }
 .qa p:last-child { margin-bottom: 0; }
 .quote { font-style: italic; color: var(--accent-ink); font-weight: 700; font-size: 9.7pt; margin: 0 0 7px; }
@@ -458,7 +450,8 @@ table.list tr { break-inside: avoid; page-break-inside: avoid; }
 
 .cover { text-align: center; margin-top: 50mm; break-after: page; page-break-after: always; }
 .cover .pill {
-  display: inline-block; background: #dbeafe; color: var(--accent-ink);
+  display: inline-block; background: #e5f4ff; color: var(--accent-ink);
+  border: 1px solid #b8def8;
   border-radius: 12px; padding: 3px 12px; font-size: 8pt; font-weight: 700;
 }
 .cover .big { font-size: 25pt; font-weight: 700; color: var(--ink-strong); margin: 12px 0 4px; }
@@ -524,8 +517,11 @@ def count_label() -> str:
 
 def check_stats(stats: dict[str, int]) -> None:
     for key, expected in EXPECTED.items():
-        if stats[key] != expected:
-            print(f"[경고] 통계 '{key}': 데이터={stats[key]} / 기준={expected}", file=sys.stderr)
+        actual = stats[key]
+        valid = actual >= expected if key == "total" else actual == expected
+        if not valid:
+            baseline = f"{expected}건 이상" if key == "total" else expected
+            print(f"[경고] 통계 '{key}': 데이터={actual} / 기준={baseline}", file=sys.stderr)
 
 
 def stats_table() -> str:
@@ -577,7 +573,7 @@ def project_card(p: Project, brk: bool = False) -> str:
         f"<div class='date'>{esc(p.period + f.period_note)}</div></div>"
         f"<div class='role'>역할: {esc(f.role_full)} &nbsp;|&nbsp; 기여도: UI 개발 {esc(f.share)}</div>"
         f"{chips(f.stack)}"
-        f"<div class='lab'>주요 업무 및 해결 과제</div>{ul(f.duties)}"
+        f"<div class='lab'>담당 범위 및 실행</div>{ul(f.duties)}"
         f"<div class='result'><div class='lab'>주요 성과</div>{ul(f.results)}</div>"
         "</article>"
     )
@@ -605,9 +601,7 @@ def cover_letter_blocks() -> str:
     out = []
     for n, (title, paragraphs) in enumerate(COVER_LETTER, 1):
         body = "".join(f"<p>{rich(p)}</p>" for p in paragraphs)
-        # 4번 항목부터 다음 페이지에서 시작해 문단이 페이지 경계에서 끊기지 않도록 한다.
-        page_class = " break" if n == 4 else ""
-        out.append(f"<section class='qa{page_class}'><h3><span class='no'>{n:02d}</span>{esc(title)}</h3>{body}</section>")
+        out.append(f"<section class='qa'><h3><span class='no'>{n:02d}</span>{esc(title)}</h3>{body}</section>")
     return "".join(out)
 
 
@@ -629,46 +623,42 @@ def site_link() -> str:
 
 
 # ============================================================== 5. DOCUMENTS
-def sec(title: str, body: str, *, brk: bool = False, flow: bool = False) -> str:
-    cls = "sec" + (" break" if brk else "") + (" flow-sec" if flow else "")
-    return f"<section class='{cls}'>{h2(title)}{body}</section>"
+def sec(title: str, body: str, *, keep: bool = False) -> str:
+    keep_class = " keep" if keep else ""
+    return f"<section class='sec{keep_class}'>{h2(title)}{body}</section>"
 
 
 def resume_body() -> str:
+    # 이력서는 빠른 검토가 목적이므로 핵심 성과와 대표 프로젝트를 앞에 배치한다.
     head = (
         banner(NAME, ROLE, f"{site_link()}<br>{esc(TAGLINE)}")
         + intro_box()
-        + h2("경력 한눈에 보기")
+        + h2("핵심 성과")
         + stats_table()
-        + h2("기술 스택")
-        + stack_table()
-        + "<div class='keep career-block'>"
-        + h2("회사 경력")
-        + career_table()
-        + "</div>"
     )
-    skills_and_profile = sec(
-        "핵심 역량 · 개발 환경",
-        competency_grid() + resume_env_panel()
-        + h2("학력 · 자격 · 교육 · 수상")
-        + education_block() + credentials_block(),
-        brk=True,
+    projects = sec("대표 프로젝트 및 성과", featured_cards(0, 7))
+    profile = sec(
+        "핵심 역량 및 기술 스택",
+        competency_grid() + h2("기술 스택") + stack_table(),
     )
-    projects_recent = sec("대표 프로젝트 (최신순)", featured_cards(0, 3), brk=True, flow=True)
-    projects_older = sec("대표 프로젝트 (계속)", featured_cards(3, None), brk=True, flow=True)
-    return f"<section class='sec'>{head}</section>" + skills_and_profile + projects_recent + projects_older
+    career = sec("회사 경력", career_table(), keep=True)
+    credentials = sec("학력 · 자격 · 교육 · 수상", education_block() + credentials_block())
+    return f"<section class='sec'>{head}</section>" + projects + profile + career + credentials
 
 
 def portfolio_body() -> str:
     head = (
         banner("PROJECT PORTFOLIO", f"{NAME} | {ROLE}", f"{site_link()}<br>{esc(TAGLINE)}")
-        + h2("프로젝트 한눈에 보기") + stats_table()
-        + h2("대표 프로젝트") + featured_cards(0, 2)
+        + intro_box()
+        + h2("프로젝트 수행 현황") + stats_table()
     )
-    middle = sec("대표 프로젝트 (최신순)", featured_cards(2, 5), brk=True, flow=True)
-    older = sec("대표 프로젝트 (계속)", featured_cards(5, None), brk=True, flow=True)
-    all_projects = sec(f"전체 프로젝트 ({count_label()})", project_table(), brk=True)
-    return f"<section class='sec'>{head}</section>" + middle + older + all_projects
+    # 포트폴리오는 프로젝트별 문제·실행·성과를 상세히 확인하는 문서로 구성한다.
+    recent = sec("대표 사례 | 구조 설계와 개발 효율", featured_cards(0, 1))
+    product = sec("대표 사례 | AI 서비스 UI와 접근성 품질", featured_cards(1, 4))
+    delivery = sec("대표 사례 | 대규모 화면 및 업무 연속성", featured_cards(4, 7))
+    all_projects = sec(f"전체 프로젝트 이력 ({count_label()})", project_table())
+    return f"<section class='sec'>{head}</section>" + recent + product + delivery + all_projects
+
 
 
 def cover_letter_body() -> str:
