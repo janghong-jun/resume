@@ -60,25 +60,25 @@ class Project:
     framework: str = ""
     featured: Featured | None = None
 
-
 F_HANWHA = Featured(
-    role_full="React UI 개발 (PA)", share="100%", period_note=" (진행 중, 종료 예정)", a11y100=True,
-    stack=("React 19", "TypeScript", "Vite", "pnpm", "TanStack Router", "shadcn/ui", "Radix UI",
+    role_full="React UI 개발 (PA)", share="융자모바일 100% (단독 진행)", period_note=" (예정, 진행 중)", a11y100=True,
+    stack=("React 19", "TypeScript", "Vite", "pnpm", "TanStack Router", "Radix UI",
            "Tailwind CSS", "SCSS Modules", "Storybook", "ESLint", "Lighthouse"),
     duties=(
-        "프로젝트 초기 개발환경 구성부터 실무 UI 개발까지 수행",
+        "융자모바일 UI 개발 단독 수행 (프로젝트 초기 세팅부터 실무 UI 개발까지)",
         "React 19·TypeScript·Vite·pnpm 기반 개발환경 구성",
         "TanStack Router 기반 라우팅 및 Storybook 기반 컴포넌트 관리 환경 구성",
-        "검색·분류 선택 등 업무 기능을 포함한 공통 컴포넌트 **37종(업무 로직 포함 7종)** 설계 및 구현",
+        "디자인 시스템 재구성 및 공통 컴포넌트 **37종(업무 로직 포함 7종)** 설계·구현 (검색·분류 선택 등)",
         "외부 데이터 주입만으로 다양한 화면에서 재사용할 수 있도록 UI와 처리 로직 분리",
-        "UI 상태 변화에 따른 애니메이션 인터랙션 및 공통 컴포넌트 구현",
-        "웹 접근성을 고려한 UI 구현 및 코드 리팩토링",
-        "Lighthouse 기반 웹 접근성 검수 및 점검 결과 문서화",
+        "제작한 컴포넌트를 기반으로 ODS(디자인 시스템) 구성",
+        "UI 상태 변화에 따른 애니메이션 인터랙션 구현",
+        "웹 접근성을 고려한 UI 구현 및 Lighthouse 기반 검수, 점검 결과 문서화",
+        "관리자 화면은 as-is 소스를 활용하여 오류 수정 및 대응",
     ),
     results=(
         "반복적으로 구현되는 업무 UI를 공통 컴포넌트 37종으로 구성해 프로젝트 전반의 화면에서 재사용할 수 있는 구조 마련",
         "데이터와 UI 처리 로직을 분리해 컴포넌트의 확장성과 활용성 확보",
-        "공통 컴포넌트와 개발환경 구성을 통해 후속 UI 개발 기반 마련",
+        "제작한 컴포넌트가 ODS(디자인 시스템)의 기반으로 활용되어 후속 UI 개발 기반 마련",
         "**WBS 기준 개발 일정 약 1개월 반 단축**에 기여",
         "프로젝트 전체 파일 기준 화면별 검수를 통해 Lighthouse Accessibility 100점 달성",
     ),
@@ -105,14 +105,14 @@ F_MIRAE = Featured(
 )
 F_DONGYANG = Featured(
     role_full="Vue UI 개발 (PA)", share="40%", stack=("Vue", "Vuetify", "Lighthouse"), a11y100=True,
-    duties=("Vue·Vuetify 기반 컴포넌트 개발", "화면 구현 및 공통 UI 구성",
+    duties=("Vue·Vuetify 기반 컴포넌트 개발", "화면 구현 및 공통 UI 컴포넌트 일부 제작 및 기존 컴포넌트 개선",
             "Lighthouse 기반 웹 접근성 검수 및 점검 결과 문서화", "담당 업무 외 팀원 개발 지원"),
     results=("재사용 가능한 공통 컴포넌트 제작", "담당 업무 외 팀원 개발 지원으로 UI 개발 업무에 기여",
              "프로젝트 전체 파일 기준 Lighthouse Accessibility 100점 달성",
              "웹 접근성 인증 심사 대응 및 웹 접근성 품질인증 마크 획득"),
 )
 F_SHINHAN = Featured(
-    role_full="모바일 UI 개발 (단독 수행)", share="100%", stack=("HTML", "SCSS"),
+    role_full="모바일 UI 개발 (PA)", share="100%", stack=("HTML", "SCSS"),
     duties=("모바일 UI 개발 전반 단독 수행",
             "신규 구축이었으나 기존(AS-IS) 소스가 존재해, 이를 기반으로 UI 컴포넌트 통일",
             "공통 UI 가이드 작성 및 적용", "UI 개발 범위 및 일정 관리"),
@@ -234,8 +234,8 @@ COMPETENCIES = (
 STACK = (
     ("UI 개발", "React, Next.js, TypeScript, JavaScript, Vue, Thymeleaf"),
     ("스타일링", "HTML5, CSS3, SCSS Modules, Tailwind CSS"),
-    ("UI 라이브러리", "shadcn/ui, Radix UI, Vuetify"),
-    ("컴포넌트·라우팅", "Storybook, TanStack Router"),
+    ("UI 라이브러리", "Radix UI, Vuetify"),
+    ("컴포넌트·라우팅", "Storybook, TanStack Router, Next.js"),
     ("표준·접근성", "웹 표준, KWCAG 2.2, KRDS, 시맨틱 마크업, Lighthouse, 키보드·스크린리더 대응"),
     ("다국어·다국가", "i18n, l10n, 언어 전환, 다국어 UI 대응"),
     ("반응형 UI", "반응형 웹, 모바일 웹, 크로스 브라우징"),
