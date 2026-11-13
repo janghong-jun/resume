@@ -135,7 +135,7 @@
   }
 }
 
-details b {
+details summary {
   cursor: pointer;
 }
 .VPDoc:not(.has-sidebar) .content,

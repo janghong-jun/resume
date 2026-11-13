@@ -62,11 +62,11 @@ class Project:
 
 F_HANWHA = Featured(
     role_full="React UI 개발 (PA)", share="융자모바일 100% (단독 진행)", period_note=" (예정, 진행 중)", a11y100=True,
-    stack=("React 19", "TypeScript", "Vite", "pnpm", "TanStack Router", "Radix UI",
+    stack=("React", "TypeScript", "Vite", "pnpm", "TanStack Router", "Radix UI",
            "Tailwind CSS", "SCSS Modules", "Storybook", "ESLint", "Lighthouse"),
     duties=(
         "융자모바일 UI 개발 단독 수행 (프로젝트 초기 세팅부터 실무 UI 개발까지)",
-        "React 19·TypeScript·Vite·pnpm 기반 개발환경 구성",
+        "React·TypeScript·Vite·pnpm 기반 개발환경 구성",
         "TanStack Router 기반 라우팅 및 Storybook 기반 컴포넌트 관리 환경 구성",
         "디자인 시스템 재구성 및 공통 컴포넌트 **37종(업무 로직 포함 7종)** 설계·구현 (검색·분류 선택 등)",
         "외부 데이터 주입만으로 다양한 화면에서 재사용할 수 있도록 UI와 처리 로직 분리",
@@ -256,16 +256,13 @@ CERTIFICATES = (
 )
 TRAININGS = (("GIS 플랫폼과 HTML5 및 Server Side JavaScript 과정", "대한상공회의소", "2013.05 ~ 2013.06"),
              ("GIS 소프트웨어 UI/UX 및 기획 과정", "대한상공회의소", "2013.06"))
-RESUME_ENV = ("**Markdown** 기반 콘텐츠 작성 및 관리", "**pnpm** 기반 패키지 관리",
-              "**VitePress** 기반 온라인 이력서 구성", "**Prettier** 기반 코드 포맷팅",
-              "**AI 활용** CI/CD 워크플로 작성 및 개선",
-              "**GitHub Actions · GitHub Pages** 기반 빌드·배포 자동화",
-              "**gh-pages**를 활용한 배포 스크립트 구성")
+RESUME_ENV = ("AI를 코드 작성 보조와 오류 분석·개선 과정에 활용",
+              "생성된 코드와 설정을 직접 검토·수정하고 프로젝트 환경에 맞게 적용",
+              "VitePress 기반 개인 온라인 이력서 구성 및 GitHub Pages 배포",
+              "AI의 도움을 받아 GitHub Actions CI/CD 워크플로 작성·개선",
+              "Markdown 기반 콘텐츠 관리, pnpm 패키지 관리, Prettier 코드 포맷팅")
 COVER_QUOTE = "좋아하는 일을 오래도록 잘하고 싶습니다."
-COVER_LEAD = (
-    "다양한 산업의 SI 프로젝트에서 쌓은 UI 개발 경험을 바탕으로, 요구사항을 정확히 파악하고 안정적인 화면 구조와 재사용 가능한 컴포넌트로 구현하는 개발자입니다. "
-    "기술을 적용하는 데 그치지 않고 반복 업무를 구조화하고 UI 품질을 높여 프로젝트 결과에 기여해 왔습니다."
-)
+COVER_LEAD = ""  # 최신 Markdown 자기소개서에는 별도 요약 문단이 없어 PDF에도 추가하지 않음
 COVER_LETTER = (
     ("지원동기 | 사용자에게 필요한 UI를 완성하는 개발자", (
         "웹은 기획과 디자인의 의도를 실제 사용자가 경험하는 결과물로 연결하는 분야라는 점에서 매력을 느껴 시작했습니다. HTML/CSS 기반 퍼블리싱으로 경력을 쌓은 뒤 React·TypeScript·Vue 등 새로운 기술을 프로젝트에 적용하며 UI 개발 역량을 확장해 왔습니다.",
@@ -273,7 +270,7 @@ COVER_LETTER = (
     )),
     ("업무역량 | UI 구조화와 독립적인 실행", (
         "프로젝트 초기 개발환경 구성부터 공통 컴포넌트 설계, 화면 구현, 품질 검수까지 UI 개발 전반을 수행해 왔습니다. 금융·보험 분야의 복잡한 업무 규칙과 다양한 화면 상태를 이해하고, 검색·분류 선택 등 업무 기능을 포함한 컴포넌트로 구현하는 데 강점이 있습니다.",
-        "한화생명 융자 차세대 시스템에서는 React 19·TypeScript·Vite 기반 환경과 라우팅·Storybook 구성을 마련하고, 공통 컴포넌트 37종을 설계·구현했습니다. 데이터와 UI 처리 로직을 분리해 여러 화면에서 재사용할 수 있는 구조를 만들었으며 WBS 대비 약 1개월 반의 일정 단축에 기여했습니다.",
+        "한화생명 융자 차세대 시스템에서는 React·TypeScript·Vite 기반 환경과 라우팅·Storybook 구성을 마련하고, 공통 컴포넌트 37종을 설계·구현했습니다. 데이터와 UI 처리 로직을 분리해 여러 화면에서 재사용할 수 있는 구조를 만들었으며 WBS 대비 약 1개월 반의 일정 단축에 기여했습니다.",
     )),
     ("문제 해결 | 품질과 개발 연속성 확보", (
         "신한라이프 GA 영업지원시스템에서는 모바일 UI 영역을 단독으로 담당하고 337개 화면에 공통 UI 가이드를 적용했습니다. 담당 범위 외 연계 채널 3개를 추가로 대응하면서도 계획된 일정 내 개발을 마무리했습니다.",
@@ -512,7 +509,7 @@ def compute_stats() -> dict[str, int]:
 
 
 def count_label() -> str:
-    return f"{len(PROJECTS) // 10 * 10}건 이상"
+    return "40건 이상"
 
 
 def check_stats(stats: dict[str, int]) -> None:
@@ -534,7 +531,7 @@ def stats_table() -> str:
         f"<tr>{''.join(f'<th>{esc(h)}</th>' for h in heads)}</tr>"
         f"<tr>{''.join(f'<td>{esc(v)}</td>' for v in vals)}</tr>"
         "<tr><th colspan='3'>웹 접근성</th><th colspan='2'>화면 개발 생산성</th><th colspan='2'>주요 경험</th></tr>"
-        "<tr><td class='wide' colspan='3'>기준 준수 · 품질 검수 · 인증 심사 대응 및 인증 마크 획득 · 개선 경험</td>"
+        "<tr><td class='wide' colspan='3'>한화생명·경기도교육청·동양생명 Lighthouse Accessibility 100점 · 동양생명 웹 접근성 품질인증 마크 획득</td>"
         f"<td class='wide' colspan='2'>{esc(PRODUCTIVITY)}</td>"
         "<td class='wide' colspan='2'>공통 컴포넌트 개발 · UI 파트 단독 수행 · 개발환경 구성</td></tr></table>"
     )
@@ -643,7 +640,8 @@ def resume_body() -> str:
     )
     career = sec("회사 경력", career_table(), keep=True)
     credentials = sec("학력 · 자격 · 교육 · 수상", education_block() + credentials_block())
-    return f"<section class='sec'>{head}</section>" + projects + profile + career + credentials
+    personal_env = sec("AI 활용 및 개인 개발환경", resume_env_panel())
+    return f"<section class='sec'>{head}</section>" + projects + profile + career + credentials + personal_env
 
 
 def portfolio_body() -> str:
@@ -666,7 +664,6 @@ def cover_letter_body() -> str:
 def _cover_letter_inner() -> str:
     return (banner("COVER LETTER", f"{NAME} | 프론트엔드 & UI 개발자 자기소개서")
             + f"<div class='quote'>“{esc(COVER_QUOTE)}”</div>"
-            + f"<div class='summary'><p>{rich(COVER_LEAD)}</p></div>"
             + cover_letter_blocks())
 
 
