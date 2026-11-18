@@ -457,6 +457,40 @@ table.list tr { break-inside: avoid; page-break-inside: avoid; }
 .cover .big { font-size: 25pt; font-weight: 700; color: var(--ink-strong); margin: 12px 0 4px; }
 .cover .sub { font-size: 10pt; color: var(--sub); margin-bottom: 22px; }
 .cover table.kv { width: 72%; margin: 0 auto; text-align: left; }
+.portfolio-url {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  margin: 0 0 10px;
+  border: 1.5px solid #8fc1f4;
+  border-left: 4px solid #2878e5;
+  border-radius: 6px;
+  background: linear-gradient(100deg, #eff7ff, #f8fbff);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.portfolio-url .url-label {
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+
+.portfolio-url .url-address {
+  font-size: 10pt;
+  font-weight: 700;
+  color: #2878e5;
+}
+
+.portfolio-url .url-guide {
+  font-size: 7.5pt;
+  color: #475569;
+  text-align: right;
+}
 
 @media screen {
   body { max-width: 182mm; margin: 20px auto; padding: 0 10px; background: #fff; }
@@ -621,6 +655,19 @@ def credentials_block() -> str:
 def site_link() -> str:
     return f"<a href='{esc(SITE_URL)}'>{esc(SITE_LABEL)}</a>"
 
+def portfolio_url_block() -> str:
+    return (
+        "<div class='portfolio-url'>"
+        "<div>"
+        "<div class='url-label'>ONLINE PORTFOLIO</div>"
+        f"<a class='url-address' href='{esc(SITE_URL)}'>"
+        f"{esc(SITE_URL)}</a>"
+        "</div>"
+        "<div class='url-guide'>"
+        "온라인 이력서 바로가기"
+        "</div>"
+        "</div>"
+    )
 
 # ============================================================== 5. DOCUMENTS
 def sec(title: str, body: str, *, keep: bool = False) -> str:
@@ -645,18 +692,30 @@ def resume_body() -> str:
     credentials = sec("학력 · 자격 · 교육 · 수상", education_block() + credentials_block())
     return f"<section class='sec'>{head}</section>" + projects + profile + career + credentials
 
-
 def portfolio_body() -> str:
     head = (
-        banner("PROJECT PORTFOLIO", f"{NAME} | {ROLE}", f"{site_link()}<br>{esc(TAGLINE)}")
+        banner(
+            "PROJECT PORTFOLIO",
+            f"{NAME} | {ROLE}",
+            esc(TAGLINE)
+        )
+        + portfolio_url_block()
         + intro_box()
-        + h2("프로젝트 수행 현황") + stats_table()
+        + h2("프로젝트 수행 현황")
+        + stats_table()
     )
-    # 대표 프로젝트는 임의의 주제별 섹션으로 나누지 않고 한 흐름으로 보여준다.
-    featured = sec("대표 프로젝트", featured_cards(0, 7))
-    all_projects = sec(f"전체 프로젝트 이력 ({count_label()})", project_table())
-    return f"<section class='sec'>{head}</section>" + featured + all_projects
 
+    featured = sec("대표 프로젝트", featured_cards(0, 7))
+    all_projects = sec(
+        f"전체 프로젝트 이력 ({count_label()})",
+        project_table()
+    )
+
+    return (
+        f"<section class='sec'>{head}</section>"
+        + featured
+        + all_projects
+    )
 
 
 def cover_letter_body() -> str:
