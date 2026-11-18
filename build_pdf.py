@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-장홍준 이력서 / 포트폴리오 / 자기소개서 / 입사지원서 PDF 빌드 스크립트 (v6)
+장홍준 이력서 / 포트폴리오 / 자기소개서 / 상세경력기술서 / 입사지원서 PDF 빌드 스크립트 (v7)
 
 사용법
     pip install weasyprint
     python build_pdf.py
     python build_pdf.py --only resume
+    python build_pdf.py --only career_detail
     python build_pdf.py --out ./dist
 
 PDF만 생성하며 HTML 중간 파일은 저장하지 않습니다.
@@ -60,8 +61,9 @@ class Project:
     framework: str = ""
     featured: Featured | None = None
 
+
 F_HANWHA = Featured(
-    role_full="React UI 개발 (PA)", share="융자모바일 100% (단독 진행)", period_note=" (예정, 진행 중)", a11y100=True,
+    role_full="React UI 개발 (PA)", share="융자모바일 100% (단독 진행)", period_note="", a11y100=True,
     stack=("React", "TypeScript", "Vite", "pnpm", "TanStack Router", "Radix UI",
            "Tailwind CSS", "SCSS Modules", "Storybook", "ESLint", "Lighthouse"),
     duties=(
@@ -138,11 +140,11 @@ F_HANA = Featured(
 )
 
 PROJECTS: tuple[Project, ...] = (
-    Project("2026.05 ~ 2027.01", "한화생명", "융자 차세대 시스템 구축", "React UI (PA)", "finance", "react", F_HANWHA),
-    Project("2025.12 ~ 2026.04", "경기도교육청", "하이코칭시스템 구축", "UI (단독 수행)", "public", "", F_GYEONGGI),
-    Project("2025.08 ~ 2025.10", "미래에셋증권", "AI Multi Agent 프레임워크 구축", "React UI (단독 수행)", "finance", "react", F_MIRAE),
-    Project("2025.07 ~ 2025.07", "라이나생명", "라이나ONE 기업 홈페이지 개선", "UI (단독 수행)", "finance"),
-    Project("2024.09 ~ 2025.03", "동양생명", "마이엔젤 서비스 통합 구축", "Vue UI (PA)", "finance", "vue", F_DONGYANG),
+    Project("2026.05.18 ~ 진행중", "한화생명", "융자 차세대 시스템 구축", "React UI (PA)", "finance", "react", F_HANWHA),
+    Project("2025.12.22 ~ 2026.04.24", "경기도교육청", "하이코칭시스템 구축", "UI (단독 수행)", "public", "", F_GYEONGGI),
+    Project("2025.08.13 ~ 2025.10.24", "미래에셋증권", "AI Multi Agent 프레임워크 구축", "React UI (단독 수행)", "finance", "react", F_MIRAE),
+    Project("2025.07.01 ~ 2025.07.31", "라이나생명", "라이나ONE 기업 홈페이지 개선", "UI (단독 수행)", "finance"),
+    Project("2024.09.02 ~ 2025.03.21", "동양생명", "마이엔젤 서비스 통합 구축", "Vue UI (PA)", "finance", "vue", F_DONGYANG),
     Project("2024.07 ~ 2024.08", "한국교과서협회", "AIDT", "Vue UI (단독 수행)", "enterprise", "vue"),
     Project("2023.11 ~ 2024.05", "신한라이프", "GA 영업지원시스템", "모바일 UI (단독 수행)", "finance", "", F_SHINHAN),
     Project("2023.01 ~ 2023.07", "현대해상", "다이렉트 고도화", "UI (PA)", "finance", "", F_HYUNDAI),
@@ -233,12 +235,12 @@ STACK = (
     ("AI 활용", "AI 기반 코드 작성 보조·오류 분석, CI/CD 워크플로 구성 및 개선"),
 )
 CAREER = (
-    ("2022.12 ~ 현재", "네티브", "React·TypeScript 기반 UI 개발, 공통 컴포넌트 설계 및 구현, 프로젝트 개발환경 구성"),
-    ("2017.11 ~ 2022.12", "재인컴퍼니 (前 유아이랩)", "금융·공공·기업 분야 웹 UI 개발, 반응형·모바일 화면 구현, 웹 표준 및 웹 접근성 준수"),
-    ("2016.02 ~ 2017.06", "넷마블", "게임 브랜드 웹사이트 및 서비스 운영 화면 개발, 게임 운영 도구 UI 구현"),
-    ("2015.03 ~ 2016.01", "짙은", "웹 UI 개발 및 사내 R&D 프로젝트 수행"),
-    ("2014.08 ~ 2015.02", "하이브랩", "웹 서비스 운영 및 프로모션 페이지 제작·개선"),
-    ("2012.09 ~ 2014.07", "하이웹솔루션", "기업·서비스 웹사이트 구축 및 UI 개발, 웹 표준 및 접근성을 고려한 마크업"),
+    ("2022.12.01 ~ 현재", "네티브", "React·TypeScript 기반 UI 개발, 공통 컴포넌트 설계 및 구현, 프로젝트 개발환경 구성"),
+    ("2017.11.13 ~ 2022.12.01", "재인컴퍼니 (前 유아이랩)", "금융·공공·기업 분야 웹 UI 개발, 반응형·모바일 화면 구현, 웹 표준 및 웹 접근성 준수"),
+    ("2016.02.15 ~ 2017.06.15", "넷마블", "게임 브랜드 웹사이트 및 서비스 운영 화면 개발, 게임 운영 도구 UI 구현"),
+    ("2015.03.30 ~ 2016.01.18", "짙은", "웹 UI 개발 및 사내 R&D 프로젝트 수행"),
+    ("2014.08.18 ~ 2015.02.18", "하이브랩", "웹 서비스 운영 및 프로모션 페이지 제작·개선"),
+    ("2012.09.12 ~ 2014.07.31", "하이웹솔루션", "기업·서비스 웹사이트 구축 및 UI 개발, 웹 표준 및 접근성을 고려한 마크업"),
 )
 AWARDS = (("2013 웹어워드 코리아 미디어·정보서비스 부문 최우수상", "부천시립도서관"),
           ("2013 웹어워드 코리아 일반기업 부문 우수상", "유니온스틸"))
@@ -262,7 +264,7 @@ RESUME_ENV = ("AI를 코드 작성 보조와 오류 분석·개선 과정에 활
               "AI의 도움을 받아 GitHub Actions CI/CD 워크플로 작성·개선",
               "Markdown 기반 콘텐츠 관리, pnpm 패키지 관리, Prettier 코드 포맷팅")
 COVER_QUOTE = "좋아하는 일을 오래도록 잘하고 싶습니다."
-COVER_LEAD = ""  # 최신 Markdown 자기소개서에는 별도 요약 문단이 없어 PDF에도 추가하지 않음
+COVER_LEAD = ""
 COVER_LETTER = (
     ("지원동기 | 사용자에게 필요한 UI를 완성하는 개발자", (
         "웹은 기획과 디자인의 의도를 실제 사용자가 경험하는 결과물로 연결하는 분야라는 점에서 매력을 느껴 시작했습니다. HTML/CSS 기반 퍼블리싱으로 경력을 쌓은 뒤 React·TypeScript·Vue 등 새로운 기술을 프로젝트에 적용하며 UI 개발 역량을 확장해 왔습니다.",
@@ -652,6 +654,7 @@ def credentials_block() -> str:
 def site_link() -> str:
     return f"<a href='{esc(SITE_URL)}'>{esc(SITE_LABEL)}</a>"
 
+
 def portfolio_url_block() -> str:
     return (
         "<div class='portfolio-url'>"
@@ -666,6 +669,7 @@ def portfolio_url_block() -> str:
         "</div>"
     )
 
+
 # ============================================================== 5. DOCUMENTS
 def sec(title: str, body: str, *, keep: bool = False) -> str:
     keep_class = " keep" if keep else ""
@@ -673,7 +677,6 @@ def sec(title: str, body: str, *, keep: bool = False) -> str:
 
 
 def resume_body() -> str:
-    # 이력서는 빠른 검토가 목적이므로 핵심 성과와 대표 프로젝트를 앞에 배치한다.
     head = (
         banner(NAME, ROLE, f"{site_link()}<br>{esc(TAGLINE)}")
         + intro_box()
@@ -689,6 +692,7 @@ def resume_body() -> str:
     credentials = sec("학력 · 자격 · 교육 · 수상", education_block() + credentials_block())
     personal_env = sec("AI 활용 및 개인 개발환경", resume_env_panel())
     return f"<section class='sec'>{head}</section>" + projects + profile + career + credentials + personal_env
+
 
 def portfolio_body() -> str:
     head = (
@@ -716,6 +720,50 @@ def portfolio_body() -> str:
     )
 
 
+def career_detail_body() -> str:
+    """상세경력기술서 전용 레이아웃: 역량·스택·대표 프로젝트 상세·전체 재직/수행 이력 통합"""
+    head = (
+        banner(
+            "CAREER DESCRIPTION",
+            f"{NAME} | 프론트엔드 & UI 개발자 상세경력기술서",
+            f"{site_link()}<br>{esc(TAGLINE)}"
+        )
+        + intro_box()
+        + h2("경력 요약 및 주요 지표")
+        + stats_table()
+    )
+    competencies = sec(
+        "핵심 직무 역량",
+        competency_grid(),
+    )
+    skills = sec(
+        "기술 스택",
+        stack_table(),
+        keep=True,
+    )
+    featured_projects = sec(
+        "주요 프로젝트 상세 경력 (담당 범위 및 성과)",
+        featured_cards(0, 7),
+    )
+    company_history = sec(
+        "회사별 재직 이력",
+        career_table(),
+        keep=True,
+    )
+    all_history = sec(
+        f"전체 프로젝트 수행 이력 ({count_label()})",
+        project_table(),
+    )
+    return (
+        f"<section class='sec'>{head}</section>"
+        + competencies
+        + skills
+        + featured_projects
+        + company_history
+        + all_history
+    )
+
+
 def cover_letter_body() -> str:
     return "<div class='cl'>" + _cover_letter_inner() + "</div>"
 
@@ -732,6 +780,10 @@ def doc_resume() -> str:
 
 def doc_portfolio() -> str:
     return portfolio_body()
+
+
+def doc_career_detail() -> str:
+    return career_detail_body()
 
 
 def doc_cover_letter() -> str:
@@ -755,6 +807,7 @@ def doc_application() -> str:
 DOCUMENTS = {
     "resume": ("장홍준_프론트엔드_이력서", "이력서", "프론트엔드/UI 개발자 이력서", doc_resume),
     "portfolio": ("장홍준_프론트엔드_포트폴리오", "포트폴리오", "프론트엔드/UI 개발자 포트폴리오", doc_portfolio),
+    "career_detail": ("장홍준_프론트엔드_상세경력기술서", "상세경력기술서", "프론트엔드/UI 개발자 상세경력기술서", doc_career_detail),
     "cover": ("장홍준_프론트엔드_자기소개서", "자기소개서", "프론트엔드/UI 개발자 자기소개서", doc_cover_letter),
     "application": ("장홍준_프론트엔드_입사지원서", "입사지원서", "입사지원서", doc_application),
 }
@@ -769,7 +822,7 @@ def wrap_page(title: str, footer_label: str, body: str) -> str:
 
 # ============================================================== 6. BUILD
 def main() -> int:
-    ap = argparse.ArgumentParser(description="이력서/포트폴리오/자기소개서/입사지원서 PDF 빌드")
+    ap = argparse.ArgumentParser(description="이력서/포트폴리오/상세경력기술서/자기소개서/입사지원서 PDF 빌드")
     ap.add_argument("--only", choices=DOCUMENTS.keys(), help="특정 PDF만 생성")
     ap.add_argument(
         "--out", type=Path, default=Path(__file__).resolve().parent / "pdf",
