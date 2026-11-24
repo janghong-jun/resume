@@ -3,7 +3,7 @@
 **Frontend UI Developer**
 
 **React · Next.js · TypeScript · Vue · Web Accessibility**
-
+ 
 금융·보험·공공·기업·게임 등 다양한 산업 분야에서 40건 이상의 SI 프로젝트를 수행한 Frontend UI Developer입니다. HTML/CSS 기반 웹 퍼블리싱으로 경력을 시작해 React·TypeScript·Vue 기반 UI 개발까지 업무 영역을 확장했습니다.
 
 프로젝트 초기 개발환경 구성부터 공통 컴포넌트 설계, 복잡한 업무 화면 구현, UI 품질 관리와 웹 접근성 검수까지 UI 개발 전반을 수행해 왔습니다. 특히 반복되는 업무 UI를 재사용 가능한 컴포넌트로 구조화하고, 데이터와 화면 처리 로직을 분리해 확장성과 유지보수성을 높이는 데 강점이 있습니다.
