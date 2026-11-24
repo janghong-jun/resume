@@ -610,6 +610,4 @@ AI의 발전으로 웹 UI 개발자의 역할과 일하는 방식도 빠르게 �
 
 **사용 기술:** Markdown · VitePress · pnpm · Prettier · GitHub Actions · GitHub Pages · gh-pages · AI 도구
 
-**포트폴리오:** https://janghong-jun.github.io/resume/
-
 ---
