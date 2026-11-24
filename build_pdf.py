@@ -1,17 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-장홍준 이력서 / 포트폴리오 / 자기소개서 / 상세경력기술서 / 입사지원서 PDF 빌드 스크립트 (v7)
+장홍준 이력서 / 포트폴리오 / 자기소개서 / 상세경력기술서 / 입사지원서 PDF 빌드 스크립트 (v8)
+
+v8 변경점
+    - 지원 회사명(--company)을 입력받아 PDF 생성 (회사명은 입사지원서 표지 제목에만 표기, 출력 폴더명으로 구분)
+    - 학력: 고등학교 ~ 최종학력을 표로 전부 기재
+    - 경력기술서: 회사별 재직 기간 · 주요 업무 · 참여 프로젝트 · UI 기여도
+    - 자기소개서: '왜 해당 직무와 해당 회사에 적합한가'를 회사별로 구성
+      (COMPANY_PROFILES 에 없는 회사는 범용 문구 + 회사명 치환으로 생성)
 
 사용법
     pip install weasyprint
-    python build_pdf.py
-    python build_pdf.py --only resume
-    python build_pdf.py --only career_detail
-    python build_pdf.py --out ./dist
+    python build_pdf.py --company 베스핀글로벌
+    python build_pdf.py -c 베스핀글로벌 --only resume cover
+    python build_pdf.py -c 다른회사 --out ./dist
+    python build_pdf.py              # 회사명을 대화형으로 입력
 
+출력 위치(기본): <스크립트 폴더>/pdf/<회사명>/장홍준_이력서.pdf
 PDF만 생성하며 HTML 중간 파일은 저장하지 않습니다.
-문서별 페이지 배치, 여백, 글자 크기, 표와 카드의 페이지 분할을 조정합니다.
 """
 from __future__ import annotations
 
@@ -37,6 +44,12 @@ FONT_STACK = (
 )
 SECTORS = {"finance": "금융 · 보험", "public": "공공", "enterprise": "일반 기업 · 기타"}
 EXPECTED = {"total": 40, "finance": 12, "public": 8, "enterprise": 24, "react": 3, "vue": 2}
+
+
+@dataclass(frozen=True)
+class Target:
+    """이번 빌드의 지원 대상. 회사명은 입사지원서 표지 제목과 출력 폴더명에만 사용."""
+    company: str
 
 
 # ============================================================== 2. CONTENT
@@ -234,6 +247,7 @@ STACK = (
     ("협업", "Jira, Confluence, Figma, PMS"),
     ("AI 활용", "AI 기반 코드 작성 보조·오류 분석, CI/CD 워크플로 구성 및 개선"),
 )
+# (재직기간, 회사명, 주요 업무) - 최신순. 참여 프로젝트는 기간으로 자동 매칭된다.
 CAREER = (
     ("2022.12.01 ~ 현재", "네티브", "React·TypeScript 기반 UI 개발, 공통 컴포넌트 설계 및 구현, 프로젝트 개발환경 구성"),
     ("2017.11.13 ~ 2022.12.01", "재인컴퍼니 (前 유아이랩)", "금융·공공·기업 분야 웹 UI 개발, 반응형·모바일 화면 구현, 웹 표준 및 웹 접근성 준수"),
@@ -244,10 +258,11 @@ CAREER = (
 )
 AWARDS = (("2013 웹어워드 코리아 미디어·정보서비스 부문 최우수상", "부천시립도서관"),
           ("2013 웹어워드 코리아 일반기업 부문 우수상", "유니온스틸"))
+# 고등학교 ~ 최종학력 전부 기재 (구분, 학교명, 전공, 재학기간, 졸업여부, 학점)
 EDUCATION = (
-    ("국가평생교육진흥원", "사회복지학 학사 (2019.03 ~ 2023.08 [졸업] / 3.54 / 4.5)"),
-    ("동원대학교", "컴퓨터애니메이션과 전문학사(공학) (2007.03 ~ 2009.02 [졸업] / 3.85 / 4.5)"),
-    ("덕수정보산업고등학교", "정보처리과 (2004.03 ~ 2007.02 [졸업])"),
+    ("대학교 (학사)", "국가평생교육진흥원", "사회복지학", "2019.03 ~ 2023.08", "졸업", "3.54 / 4.5"),
+    ("대학 (전문학사)", "동원대학교", "컴퓨터애니메이션과 (공학)", "2007.03 ~ 2009.02", "졸업", "3.85 / 4.5"),
+    ("고등학교", "덕수정보산업고등학교", "정보처리과", "2004.03 ~ 2007.02", "졸업", "-"),
 )
 CERTIFICATES = (
     ("사회복지사 2급", "한국사회복지사협회", "2020.03.17"),
@@ -264,26 +279,51 @@ RESUME_ENV = ("AI를 코드 작성 보조와 오류 분석·개선 과정에 활
               "AI의 도움을 받아 GitHub Actions CI/CD 워크플로 작성·개선",
               "Markdown 기반 콘텐츠 관리, pnpm 패키지 관리, Prettier 코드 포맷팅")
 COVER_QUOTE = "좋아하는 일을 오래도록 잘하고 싶습니다."
-COVER_LEAD = ""
-COVER_LETTER = (
-    ("지원동기 | 사용자에게 필요한 UI를 완성하는 개발자", (
-        "웹은 기획과 디자인의 의도를 실제 사용자가 경험하는 결과물로 연결하는 분야라는 점에서 매력을 느껴 시작했습니다. HTML/CSS 기반 퍼블리싱으로 경력을 쌓은 뒤 React·TypeScript·Vue 등 새로운 기술을 프로젝트에 적용하며 UI 개발 역량을 확장해 왔습니다.",
-        "다양한 산업의 프로젝트를 경험하며 중요한 것은 특정 기술을 사용하는 데 그치지 않고, 업무와 사용자의 맥락을 이해해 안정적이고 일관된 UI로 구현하는 것임을 배웠습니다. 앞으로도 기본기를 바탕으로 새로운 기술을 익히고, 실제 서비스의 완성도에 기여하고자 합니다.",
-    )),
-    ("업무역량 | UI 구조화와 독립적인 실행", (
-        "프로젝트 초기 개발환경 구성부터 공통 컴포넌트 설계, 화면 구현, 품질 검수까지 UI 개발 전반을 수행해 왔습니다. 금융·보험 분야의 복잡한 업무 규칙과 다양한 화면 상태를 이해하고, 검색·분류 선택 등 업무 기능을 포함한 컴포넌트로 구현하는 데 강점이 있습니다.",
-        "한화생명 융자 차세대 시스템에서는 React·TypeScript·Vite 기반 환경과 라우팅·Storybook 구성을 마련하고, 공통 컴포넌트 37종을 설계·구현했습니다. 데이터와 UI 처리 로직을 분리해 여러 화면에서 재사용할 수 있는 구조를 만들었으며 WBS 대비 약 1개월 반의 일정 단축에 기여했습니다.",
-    )),
-    ("문제 해결 | 품질과 개발 연속성 확보", (
-        "신한라이프 GA 영업지원시스템에서는 모바일 UI 영역을 단독으로 담당하고 337개 화면에 공통 UI 가이드를 적용했습니다. 담당 범위 외 연계 채널 3개를 추가로 대응하면서도 계획된 일정 내 개발을 마무리했습니다.",
-        "하나은행 원큐 리뉴얼에서는 담당 채널의 리더 교체로 발생한 업무 공백을 인수해 250개 화면의 UI 개발을 이어갔습니다. 기존 화면 구조와 개발 히스토리를 파악하고 담당 화면 외 작업도 지원해 개발 연속성 확보에 기여했습니다.",
-        "KWCAG 2.2를 고려한 시맨틱 마크업과 키보드·스크린리더 대응을 실무에 적용해 왔으며, 한화생명·경기도교육청·동양생명 프로젝트에서 Lighthouse Accessibility 100점을 달성했습니다. 동양생명 프로젝트에서는 웹 접근성 인증 심사에 대응해 품질인증 마크를 획득했습니다.",
-    )),
-    ("입사 후 목표 | 기본기와 자동화를 함께 발전시키는 개발자", (
-        "입사 후에는 먼저 서비스의 구조와 업무 흐름, 개발 규칙을 빠르게 파악하고 팀의 기준에 맞춰 안정적으로 결과물을 내겠습니다. 반복되는 UI와 공통 기능은 재사용 가능한 구조로 정리하고, 접근성과 사용성을 함께 고려해 유지보수하기 좋은 UI를 구현하겠습니다.",
-        "AI는 코드 작성 보조와 오류 분석, 개발 자동화에 활용하되 결과를 그대로 적용하기보다 직접 검토하고 프로젝트 환경에 맞게 개선하겠습니다. 개인 온라인 이력서를 VitePress로 구성하고 GitHub Actions·GitHub Pages 배포 자동화를 구축한 경험을 바탕으로 개발 과정의 반복 작업도 꾸준히 개선하겠습니다.",
-        "어제보다 조금이라도 더 나은 결과물을 만든다는 기준으로 기본기를 지키면서 새로운 기술을 익히고, 맡은 업무를 끝까지 책임지는 UI 개발자로 기여하겠습니다.",
-    )),
+
+# ---- 자기소개서: 회사별 문구 ----------------------------------------------------
+# 문구 안에서 {company} 는 자동 치환된다(현재 문구에는 사용하지 않음). (조사 문제를 피하려고 '에서/의' 형태로 사용)
+# COMPANY_PROFILES 에 키(회사명)가 있으면 해당 문구를, 없으면 GENERIC_* 범용 문구를 쓴다.
+# 키: motive_title, motive(지원동기 문단들), goal_title, goal(입사 후 목표 문단들)
+COMPANY_PROFILES: dict[str, dict[str, tuple[str, ...] | str]] = {
+    "베스핀글로벌": {
+        "motive_title": "지원동기 | 다양한 고객의 클라우드 서비스를 UI로 완성하고 싶습니다",
+        "motive": (
+            "다양한 산업의 고객이 클라우드를 도입하고 운영하는 과정을 지원하는 클라우드 전문 기업은, 고객이 직접 사용하는 화면과 관리 도구의 완성도가 서비스 경험을 좌우하는 환경이라고 생각합니다. 저는 금융·보험·공공·기업 등 40건 이상의 SI 프로젝트에서 업종마다 다른 업무 규칙과 고객 요구를 UI로 구현해 왔고, 이 경험이 다양한 고객사를 상대하는 서비스 개발에 도움이 될 것이라 판단해 지원했습니다.",
+            "클라우드 운영·관리 서비스는 리소스 현황, 비용, 알림처럼 정보량이 많고 상태 변화가 잦은 화면이 중심이 됩니다. 한화생명 프로젝트에서 업무 로직을 포함한 공통 컴포넌트 37종을 설계하고 데이터와 UI 처리 로직을 분리해 온 경험을, 복잡한 데이터를 정확하고 일관되게 보여주는 UI 개발에 적용하고 싶습니다.",
+        ),
+        "goal_title": "입사 후 목표 | 확장 가능한 UI 구조로 서비스 품질에 기여하겠습니다",
+        "goal": (
+            "입사 후에는 먼저 서비스의 구조와 고객 운영 흐름, 개발 규칙을 빠르게 파악하고 팀의 기준에 맞춰 안정적으로 결과물을 내겠습니다. 반복되는 화면은 공통 컴포넌트로 정리하고 데이터와 UI 처리 로직을 분리해, 다양한 고객 요구와 기능 확장에도 대응할 수 있는 UI 구조를 만들겠습니다.",
+            "Storybook 기반 컴포넌트 관리와 Lighthouse 기반 접근성·품질 검수 경험을 활용해 변경이 잦은 화면에서도 일관성과 품질을 유지하는 데 기여하겠습니다. AI는 코드 작성 보조와 오류 분석, 개발 자동화에 활용하되 결과를 그대로 적용하지 않고 직접 검토하고 프로젝트 환경에 맞게 개선하겠습니다.",
+            "어제보다 조금이라도 더 나은 결과물을 만든다는 기준으로 기본기를 지키면서 새로운 기술을 익히고, 맡은 업무를 끝까지 책임지는 UI 개발자로 기여하겠습니다.",
+        ),
+    },
+}
+
+GENERIC_MOTIVE_TITLE = "지원동기 | 사용자에게 필요한 UI를 완성하는 개발자"
+GENERIC_MOTIVE = (
+    "웹은 기획과 디자인의 의도를 실제 사용자가 경험하는 결과물로 연결하는 분야라는 점에서 매력을 느껴 시작했습니다. HTML/CSS 기반 퍼블리싱으로 경력을 쌓은 뒤 React·TypeScript·Vue 등 새로운 기술을 프로젝트에 적용하며 UI 개발 역량을 확장해 왔습니다.",
+    "다양한 산업의 프로젝트를 경험하며 중요한 것은 특정 기술을 사용하는 데 그치지 않고, 업무와 사용자의 맥락을 이해해 안정적이고 일관된 UI로 구현하는 것임을 배웠습니다. 이러한 경험을 바탕으로 서비스 완성도에 기여하고자 지원했습니다.",
+)
+GENERIC_GOAL_TITLE = "입사 후 목표 | 기본기와 자동화를 함께 발전시키는 개발자"
+GENERIC_GOAL = (
+    "입사 후에는 먼저 서비스의 구조와 업무 흐름, 개발 규칙을 빠르게 파악하고 팀의 기준에 맞춰 안정적으로 결과물을 내겠습니다. 반복되는 UI와 공통 기능은 재사용 가능한 구조로 정리하고, 접근성과 사용성을 함께 고려해 유지보수하기 좋은 UI를 구현하겠습니다.",
+    "AI는 코드 작성 보조와 오류 분석, 개발 자동화에 활용하되 결과를 그대로 적용하기보다 직접 검토하고 프로젝트 환경에 맞게 개선하겠습니다. 개인 온라인 이력서를 VitePress로 구성하고 GitHub Actions·GitHub Pages 배포 자동화를 구축한 경험을 바탕으로 개발 과정의 반복 작업도 꾸준히 개선하겠습니다.",
+    "어제보다 조금이라도 더 나은 결과물을 만든다는 기준으로 기본기를 지키면서 새로운 기술을 익히고, 맡은 업무를 끝까지 책임지는 UI 개발자로 기여하겠습니다.",
+)
+
+# 회사와 무관한 공통 본문 (직무 적합성 / 문제 해결·협업)
+COVER_FIT_TITLE = "직무 적합성 | 바로 활용할 수 있는 핵심 역량"
+COVER_FIT = (
+    "프로젝트 초기 개발환경 구성부터 공통 컴포넌트 설계, 화면 구현, 품질 검수까지 UI 개발 전반을 수행해 왔습니다. 금융·보험 분야의 복잡한 업무 규칙과 다양한 화면 상태를 이해하고, 검색·분류 선택 등 업무 기능을 포함한 컴포넌트로 구현하는 데 강점이 있습니다.",
+    "한화생명 융자 차세대 시스템에서는 React·TypeScript·Vite 기반 환경과 라우팅·Storybook 구성을 마련하고, 공통 컴포넌트 37종을 설계·구현했습니다. 데이터와 UI 처리 로직을 분리해 여러 화면에서 재사용할 수 있는 구조를 만들었으며 WBS 대비 약 1개월 반의 일정 단축에 기여했습니다.",
+    "KWCAG 2.2를 고려한 시맨틱 마크업과 키보드·스크린리더 대응을 실무에 적용해 왔으며, 한화생명·경기도교육청·동양생명 프로젝트에서 Lighthouse Accessibility 100점을 달성했습니다. 동양생명 프로젝트에서는 웹 접근성 인증 심사에 대응해 품질인증 마크를 획득했습니다.",
+)
+COVER_TEAM_TITLE = "협업 및 문제 해결 | 책임감 있는 수행"
+COVER_TEAM = (
+    "신한라이프 GA 영업지원시스템에서는 모바일 UI 영역을 단독으로 담당하고 337개 화면에 공통 UI 가이드를 적용했습니다. 담당 범위 외 연계 채널 3개를 추가로 대응하면서도 계획된 일정 내 개발을 마무리했습니다.",
+    "하나은행 원큐 리뉴얼에서는 담당 채널의 리더 교체로 발생한 업무 공백을 인수해 250개 화면의 UI 개발을 이어갔습니다. 기존 화면 구조와 개발 히스토리를 파악하고 담당 화면 외 작업도 지원해 개발 연속성 확보에 기여했습니다.",
+    "미래에셋증권 프로젝트에서는 React 경험이 없는 백엔드 개발자 2명에게 데이터 바인딩 위치를 안내해 UI와 데이터 연동 작업을 지원했습니다. 직군이 다른 구성원과도 필요한 기준을 먼저 공유하며 일하는 방식을 새로운 팀에서도 이어가겠습니다.",
 )
 
 
@@ -415,6 +455,18 @@ table.list td { padding: 2.5px 6px; border-bottom: 1px solid var(--line); vertic
 table.list tbody tr:nth-child(even) td { background: var(--surface); }
 table.list thead { display: table-header-group; }
 table.list tr { break-inside: avoid; page-break-inside: avoid; }
+table.list td.c, table.list th.c { text-align: center; }
+
+/* 회사별 경력기술서 블록 */
+.company { margin: 0 0 8px; }
+.co-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+  background: var(--surface-2); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  padding: 4px 8px; break-after: avoid; page-break-after: avoid;
+}
+.co-name { font-size: 9.2pt; font-weight: 700; color: var(--ink-strong); }
+.co-date { font-size: 7.6pt; color: var(--muted); white-space: nowrap; }
+.co-desc { font-size: 7.7pt; color: var(--sub); padding: 3px 8px 4px; break-after: avoid; page-break-after: avoid; }
 
 .env-panel {
   background: #f1f9ff; border: 1px solid #cfe4f4; border-left: 3px solid var(--accent);
@@ -501,8 +553,14 @@ table.list tr { break-inside: avoid; page-break-inside: avoid; }
 """
 
 
+def css_string(text: str) -> str:
+    """CSS content: "..." 에 안전하게 넣을 수 있도록 이스케이프."""
+    return text.replace("\\", "\\\\").replace('"', '\\"')
+
+
 def build_css(footer_label: str) -> str:
-    return CSS.replace("__FONT__", FONT_STACK).replace("__FOOTER__", f"{NAME} - {footer_label}")
+    footer = css_string(f"{NAME} - {footer_label}")
+    return CSS.replace("__FONT__", FONT_STACK).replace("__FOOTER__", footer)
 
 
 # ============================================================== 4. RENDER
@@ -624,22 +682,103 @@ def project_table() -> str:
             "<th>프로젝트명</th><th style='width:19%'>담당</th></tr></thead><tbody>" + rows + "</tbody></table>")
 
 
-def career_table() -> str:
-    rows = "".join(f"<tr><td>{esc(a)}</td><td>{esc(b)}</td><td>{esc(c)}</td></tr>" for a, b, c in CAREER)
-    return ("<table class='list'><thead><tr><th style='width:22%'>기간</th><th style='width:26%'>회사명</th>"
-            "<th>주요 업무</th></tr></thead><tbody>" + rows + "</tbody></table>")
+# ---- 경력기술서: 회사별 재직 이력 + 참여 프로젝트 + 기여도 ----------------------
+def _ym(text: str) -> tuple[int, int]:
+    """'2022.12.01 ~ 현재' / '2024.07 ~ 2024.08' 의 시작 연월을 (연, 월)로 변환."""
+    start = text.split("~")[0].strip()
+    year, month = start.split(".")[:2]
+    return int(year), int(month)
 
 
-def cover_letter_blocks() -> str:
+def contribution(p: Project) -> str:
+    """UI 기여도 표기. 대표 프로젝트는 상세 수치, 그 외는 담당 형태로 표기."""
+    if p.featured:
+        share = p.featured.share
+        return f"UI {share}" if share[:1].isdigit() else share
+    if "단독 수행" in p.role:
+        return "UI 100% (단독 수행)"
+    return "UI 파트 참여"
+
+
+def projects_by_company() -> list[tuple[tuple[str, str, str], list[Project]]]:
+    """프로젝트 시작월 기준으로, 시작일이 그 이전인 회사 중 가장 최근 회사에 배정."""
+    groups: dict[str, list[Project]] = {c[1]: [] for c in CAREER}
+    by_start = sorted(CAREER, key=lambda c: _ym(c[0]), reverse=True)
+    for p in PROJECTS:
+        ps = _ym(p.period)
+        owner = next((c for c in by_start if _ym(c[0]) <= ps), None)
+        if owner is None:
+            print(f"[경고] 소속 회사를 찾지 못한 프로젝트: {p.client} {p.title}", file=sys.stderr)
+            continue
+        groups[owner[1]].append(p)
+    return [(c, groups[c[1]]) for c in CAREER]
+
+
+def career_statement() -> str:
+    """회사별: 재직 기간 · 주요 업무 · 참여 프로젝트(기간/프로젝트/담당/기여도)."""
+    blocks = []
+    for (period, company, desc), projects in projects_by_company():
+        rows = "".join(
+            f"<tr><td>{esc(p.period)}</td><td><b>{esc(p.client)}</b> {esc(p.title)}</td>"
+            f"<td>{esc(p.role)}</td><td>{esc(contribution(p))}</td></tr>"
+            for p in projects
+        )
+        table = (
+            "<table class='list'><thead><tr><th style='width:21%'>기간</th><th>고객사 · 프로젝트</th>"
+            "<th style='width:17%'>담당</th><th style='width:19%'>UI 기여도</th></tr></thead>"
+            f"<tbody>{rows}</tbody></table>"
+        ) if projects else ""
+        blocks.append(
+            "<section class='company'>"
+            f"<div class='co-head'><div class='co-name'>{esc(company)} "
+            f"<span class='muted'>· 참여 프로젝트 {len(projects)}건</span></div>"
+            f"<div class='co-date'>{esc(period)}</div></div>"
+            f"<div class='co-desc'>주요 업무: {esc(desc)}</div>{table}</section>"
+        )
+    note = ("<div class='note muted'>※ 기여도는 해당 프로젝트 내 UI 개발 파트 기준이며, "
+            "대표 프로젝트의 상세 담당 범위와 성과는 아래 '대표 프로젝트 상세'에 기재했습니다.</div>")
+    return note + "".join(blocks)
+
+
+def education_table() -> str:
+    """고등학교 ~ 최종학력 전체를 표로 기재."""
+    rows = "".join(
+        f"<tr><td>{esc(kind)}</td><td><b>{esc(school)}</b></td><td>{esc(major)}</td>"
+        f"<td>{esc(period)}</td><td class='c'>{esc(status)}</td><td class='c'>{esc(gpa)}</td></tr>"
+        for kind, school, major, period, status, gpa in EDUCATION
+    )
+    return ("<table class='list'><thead><tr><th style='width:15%'>구분</th><th style='width:22%'>학교명</th>"
+            "<th>전공</th><th style='width:21%'>재학기간</th><th class='c' style='width:9%'>졸업</th>"
+            "<th class='c' style='width:12%'>학점</th></tr></thead>"
+            f"<tbody>{rows}</tbody></table>")
+
+
+def cover_letter_blocks(t: Target) -> str:
     out = []
-    for n, (title, paragraphs) in enumerate(COVER_LETTER, 1):
+    for n, (title, paragraphs) in enumerate(cover_letter_sections(t), 1):
         body = "".join(f"<p>{rich(p)}</p>" for p in paragraphs)
         out.append(f"<section class='qa'><h3><span class='no'>{n:02d}</span>{esc(title)}</h3>{body}</section>")
     return "".join(out)
 
 
-def education_block() -> str:
-    return kv_table((k, esc(v)) for k, v in EDUCATION)
+def cover_letter_sections(t: Target) -> list[tuple[str, tuple[str, ...]]]:
+    """회사별 프로필이 있으면 사용, 없으면 범용 문구에 회사명을 치환해 구성."""
+    prof = COMPANY_PROFILES.get(t.company, {})
+    fmt = {"company": t.company}
+
+    def pick(key: str, default):
+        return prof.get(key, default)
+
+    def f(text: str) -> str:
+        return text.format(**fmt)
+
+    sections = [
+        (pick("motive_title", GENERIC_MOTIVE_TITLE), pick("motive", GENERIC_MOTIVE)),
+        (COVER_FIT_TITLE, COVER_FIT),
+        (COVER_TEAM_TITLE, COVER_TEAM),
+        (pick("goal_title", GENERIC_GOAL_TITLE), pick("goal", GENERIC_GOAL)),
+    ]
+    return [(f(title), tuple(f(p) for p in paragraphs)) for title, paragraphs in sections]
 
 
 def credentials_block() -> str:
@@ -676,25 +815,30 @@ def sec(title: str, body: str, *, keep: bool = False) -> str:
     return f"<section class='sec{keep_class}'>{h2(title)}{body}</section>"
 
 
-def resume_body() -> str:
+def resume_body(t: Target) -> str:
+    """이력서: 요약 → 학력 → 경력기술서(참여 프로젝트·기여도) → 대표 프로젝트 → 역량·스택 → 자격 → AI 활용"""
     head = (
         banner(NAME, ROLE, f"{site_link()}<br>{esc(TAGLINE)}")
         + intro_box()
         + h2("핵심 성과")
         + stats_table()
     )
-    projects = sec("대표 프로젝트 및 성과", featured_cards(0, 7))
+    education = sec("학력 (고등학교 ~ 최종학력)", education_table(), keep=True)
+    statement = sec("경력기술서 · 참여 프로젝트 및 기여도", career_statement())
+    projects = sec("대표 프로젝트 상세 (담당 범위 및 성과)", featured_cards(0, 7))
     profile = sec(
         "핵심 역량 및 기술 스택",
         competency_grid() + h2("기술 스택") + stack_table(),
     )
-    career = sec("회사 경력", career_table(), keep=True)
-    credentials = sec("학력 · 자격 · 교육 · 수상", education_block() + credentials_block())
+    credentials = sec("자격 · 교육 · 수상", credentials_block())
     personal_env = sec("AI 활용 및 개인 개발환경", resume_env_panel())
-    return f"<section class='sec'>{head}</section>" + projects + profile + career + credentials + personal_env
+    return (
+        f"<section class='sec'>{head}</section>"
+        + education + statement + projects + profile + credentials + personal_env
+    )
 
 
-def portfolio_body() -> str:
+def portfolio_body(t: Target) -> str:
     head = (
         banner(
             "PROJECT PORTFOLIO",
@@ -720,8 +864,8 @@ def portfolio_body() -> str:
     )
 
 
-def career_detail_body() -> str:
-    """상세경력기술서 전용 레이아웃: 역량·스택·대표 프로젝트 상세·전체 재직/수행 이력 통합"""
+def career_detail_body(t: Target) -> str:
+    """상세경력기술서: 역량·스택·대표 프로젝트 상세·회사별 경력기술서(전체 프로젝트·기여도)"""
     head = (
         banner(
             "CAREER DESCRIPTION",
@@ -732,84 +876,66 @@ def career_detail_body() -> str:
         + h2("경력 요약 및 주요 지표")
         + stats_table()
     )
-    competencies = sec(
-        "핵심 직무 역량",
-        competency_grid(),
-    )
-    skills = sec(
-        "기술 스택",
-        stack_table(),
-        keep=True,
-    )
-    featured_projects = sec(
-        "주요 프로젝트 상세 경력 (담당 범위 및 성과)",
-        featured_cards(0, 7),
-    )
-    company_history = sec(
-        "회사별 재직 이력",
-        career_table(),
-        keep=True,
-    )
-    all_history = sec(
-        f"전체 프로젝트 수행 이력 ({count_label()})",
-        project_table(),
-    )
+    competencies = sec("핵심 직무 역량", competency_grid())
+    skills = sec("기술 스택", stack_table(), keep=True)
+    featured_projects = sec("주요 프로젝트 상세 경력 (담당 범위 및 성과)", featured_cards(0, 7))
+    statement = sec(f"회사별 경력기술서 · 전체 프로젝트 이력 ({count_label()})", career_statement())
     return (
         f"<section class='sec'>{head}</section>"
         + competencies
         + skills
         + featured_projects
-        + company_history
-        + all_history
+        + statement
     )
 
 
-def cover_letter_body() -> str:
-    return "<div class='cl'>" + _cover_letter_inner() + "</div>"
+def cover_letter_body(t: Target) -> str:
+    return "<div class='cl'>" + _cover_letter_inner(t) + "</div>"
 
 
-def _cover_letter_inner() -> str:
+def _cover_letter_inner(t: Target) -> str:
     return (banner("COVER LETTER", f"{NAME} | 프론트엔드 & UI 개발자 자기소개서")
             + f"<div class='quote'>“{esc(COVER_QUOTE)}”</div>"
-            + cover_letter_blocks())
+            + cover_letter_blocks(t))
 
 
-def doc_resume() -> str:
-    return resume_body()
+def doc_resume(t: Target) -> str:
+    return resume_body(t)
 
 
-def doc_portfolio() -> str:
-    return portfolio_body()
+def doc_portfolio(t: Target) -> str:
+    return portfolio_body(t)
 
 
-def doc_career_detail() -> str:
-    return career_detail_body()
+def doc_career_detail(t: Target) -> str:
+    return career_detail_body(t)
 
 
-def doc_cover_letter() -> str:
-    return cover_letter_body()
+def doc_cover_letter(t: Target) -> str:
+    return cover_letter_body(t)
 
 
-def doc_application() -> str:
+def doc_application(t: Target) -> str:
     cover = (
         "<div class='cover'>"
         f"<span class='pill'>{esc(ROLE)}</span>"
-        "<div class='big'>입사지원서</div>"
+        f"<div class='big'>{esc(t.company)} 입사지원서</div>"
         f"<div class='sub'>{esc(NAME)} | 이력서 · 자기소개서</div>"
-        + kv_table((("성명", f"<b>{esc(NAME)}</b>"), ("직무", esc(ROLE)),
-                    ("핵심 스택", "React, Next.js, TypeScript, Vue, HTML5, CSS3, SCSS Modules, Tailwind CSS, Web Accessibility, i18n"),
+        + kv_table((("성명", f"<b>{esc(NAME)}</b>"), ("핵심 스택", "React, Next.js, TypeScript, Vue, HTML5, CSS3, SCSS Modules, Tailwind CSS, Web Accessibility, i18n"),
+                    ("제출 서류", "이력서 (학력 · 경력기술서 · 참여 프로젝트 및 기여도) / 자기소개서"),
                     ("온라인 이력서", f"<b>{site_link()}</b>")))
         + "</div>"
     )
-    return cover + f"<div class='break'>{resume_body()}</div>" + f"<div class='break'>{cover_letter_body()}</div>"
+    return cover + f"<div class='break'>{resume_body(t)}</div>" + f"<div class='break'>{cover_letter_body(t)}</div>"
 
 
+# key: (파일명 접미, 문서 제목, 푸터 라벨, 렌더 함수)
 DOCUMENTS = {
-    "resume": ("장홍준_프론트엔드_이력서", "이력서", "프론트엔드/UI 개발자 이력서", doc_resume),
-    "portfolio": ("장홍준_프론트엔드_포트폴리오", "포트폴리오", "프론트엔드/UI 개발자 포트폴리오", doc_portfolio),
-    "career_detail": ("장홍준_프론트엔드_상세경력기술서", "상세경력기술서", "프론트엔드/UI 개발자 상세경력기술서", doc_career_detail),
-    "cover": ("장홍준_프론트엔드_자기소개서", "자기소개서", "프론트엔드/UI 개발자 자기소개서", doc_cover_letter),
-    "application": ("장홍준_프론트엔드_입사지원서", "입사지원서", "입사지원서", doc_application),
+    "resume": ("이력서", "이력서", "이력서", doc_resume),
+    "portfolio": ("포트폴리오", "포트폴리오", "포트폴리오", doc_portfolio),
+    "career_detail": ("상세경력기술서", "상세경력기술서", "상세경력기술서", doc_career_detail),
+    "cover": ("자기소개서", "자기소개서", "자기소개서", doc_cover_letter),
+    "application": ("입사지원서", "입사지원서", "입사지원서", doc_application),
 }
 
 
@@ -821,29 +947,59 @@ def wrap_page(title: str, footer_label: str, body: str) -> str:
 
 
 # ============================================================== 6. BUILD
+def safe_name(text: str) -> str:
+    """파일/폴더명으로 쓸 수 없는 문자를 제거하고 공백은 _ 로 치환."""
+    cleaned = re.sub(r'[\\/:*?"<>|\s]+', "_", text).strip("_.")
+    return cleaned or "company"
+
+
+def resolve_target(args: argparse.Namespace) -> Target | None:
+    company = (args.company or "").strip()
+    if not company:
+        if not sys.stdin.isatty():
+            print("지원 회사명이 필요합니다: python build_pdf.py --company 회사명", file=sys.stderr)
+            return None
+        company = input("지원 회사명: ").strip()
+        if not company:
+            print("회사명이 비어 있습니다.", file=sys.stderr)
+            return None
+    return Target(company=company)
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="이력서/포트폴리오/상세경력기술서/자기소개서/입사지원서 PDF 빌드")
-    ap.add_argument("--only", choices=DOCUMENTS.keys(), help="특정 PDF만 생성")
+    ap = argparse.ArgumentParser(description="이력서/포트폴리오/상세경력기술서/자기소개서/입사지원서 PDF 빌드 (지원 회사별)")
+    ap.add_argument("-c", "--company", help="지원 회사명 (예: 베스핀글로벌). 생략하면 입력 프롬프트 표시")
+    ap.add_argument("--only", nargs="+", choices=DOCUMENTS.keys(), metavar="DOC",
+                    help=f"생성할 문서만 지정 (여러 개 가능): {', '.join(DOCUMENTS)}")
     ap.add_argument(
         "--out", type=Path, default=Path(__file__).resolve().parent / "pdf",
-        help="PDF 출력 폴더 (기본값: 스크립트 폴더/pdf)",
+        help="PDF 출력 폴더 (기본값: 스크립트 폴더/pdf/<회사명>)",
     )
     args = ap.parse_args()
 
+    target = resolve_target(args)
+    if target is None:
+        return 1
+    if target.company not in COMPANY_PROFILES:
+        print(f"[안내] '{target.company}' 전용 자기소개서 문구가 없어 범용 문구로 생성합니다. "
+              "COMPANY_PROFILES 에 추가하면 회사별 문구를 쓸 수 있습니다.", file=sys.stderr)
+
     check_stats(compute_stats())
-    args.out.mkdir(parents=True, exist_ok=True)
+    company_key = safe_name(target.company)
+    out_dir = args.out / company_key
+    out_dir.mkdir(parents=True, exist_ok=True)
     try:
         from weasyprint import HTML
     except ImportError:
         print("weasyprint가 필요합니다: pip install weasyprint", file=sys.stderr)
         return 1
 
-    selected = [args.only] if args.only else list(DOCUMENTS)
+    selected = args.only if args.only else list(DOCUMENTS)
     base_url = str(Path(__file__).resolve().parent)
     for key in selected:
-        filename, title, footer, render = DOCUMENTS[key]
-        source = wrap_page(title, footer, render())
-        pdf_path = args.out / f"{filename}.pdf"
+        suffix, title, footer, render = DOCUMENTS[key]
+        source = wrap_page(title, footer, render(target))
+        pdf_path = out_dir / f"{NAME}_{suffix}.pdf"
         try:
             HTML(string=source, base_url=base_url).write_pdf(str(pdf_path))
         except Exception as exc:
