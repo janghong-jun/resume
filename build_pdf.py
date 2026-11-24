@@ -12,10 +12,10 @@ v8 변경점
 
 사용법
     pip install weasyprint
-    python build_pdf.py --company 베스핀글로벌
+    python build_pdf.py              # 실행 후 회사명 입력 (Enter만 누르면 기본 문서)
+    python build_pdf.py --company 베스핀글로벌   # (선택) 입력 없이 바로 지정
     python build_pdf.py -c 베스핀글로벌 --only resume cover
     python build_pdf.py -c 다른회사 --out ./dist
-    python build_pdf.py              # 회사명 없이 기본(범용) 문서 생성 -> pdf/default/
 
 출력 위치(기본): <스크립트 폴더>/pdf/<회사명 또는 default>/장홍준_이력서.pdf
 PDF만 생성하며 HTML 중간 파일은 저장하지 않습니다.
@@ -957,13 +957,16 @@ def safe_name(text: str) -> str:
 
 
 def resolve_target(args: argparse.Namespace) -> Target:
-    """회사명이 없으면 빈 값(기본)으로 처리 -> 범용 문구, 표지는 '입사지원서', 폴더는 default."""
-    return Target(company=(args.company or "").strip())
+    """회사명 결정: 옵션 > 입력 프롬프트. 입력 없이 Enter 하면(또는 터미널이 아니면) 기본(범용)."""
+    company = (args.company or "").strip()
+    if not company and sys.stdin.isatty():
+        company = input("지원 회사명 (없으면 Enter = 기본): ").strip()
+    return Target(company=company)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="이력서/포트폴리오/상세경력기술서/자기소개서/입사지원서 PDF 빌드 (지원 회사별)")
-    ap.add_argument("-c", "--company", help="지원 회사명 (예: 베스핀글로벌). 생략하면 기본(범용) 문서 생성")
+    ap.add_argument("-c", "--company", help="지원 회사명 (선택). 생략하면 실행 시 입력창이 뜨고, Enter만 누르면 기본(범용) 문서 생성")
     ap.add_argument("--only", nargs="+", choices=DOCUMENTS.keys(), metavar="DOC",
                     help=f"생성할 문서만 지정 (여러 개 가능): {', '.join(DOCUMENTS)}")
     ap.add_argument(
