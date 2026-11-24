@@ -613,15 +613,3 @@ AI의 발전으로 웹 UI 개발자의 역할과 일하는 방식도 빠르게 �
 **포트폴리오:** https://janghong-jun.github.io/resume/
 
 ---
-
-## 📌 공통 입사지원 정보
-
-| 항목 | 내용 |
-| :--- | :--- |
-| 성명 | 장홍준 |
-| 이메일 | kbhj0729@gmail.com |
-| 연락처 | 010-9500-0729 |
-| 국적 | 대한민국 |
-| 총 경력 | 13년 이상 |
-| 희망 직무 키워드 | Frontend UI Developer / 웹 UI 개발 / 프론트엔드 UI 개발 |
-| 포트폴리오 | https://janghong-jun.github.io/resume/ |
