@@ -8,16 +8,16 @@ v8 변경점
     - 학력: 고등학교 ~ 최종학력을 표로 전부 기재
     - 경력기술서: 회사별 재직 기간 · 주요 업무 · 참여 프로젝트 · UI 기여도
     - 자기소개서: '왜 해당 직무와 해당 회사에 적합한가'를 회사별로 구성
-      (COMPANY_PROFILES 에 없는 회사는 범용 문구 + 회사명 치환으로 생성)
+      (COMPANY_PROFILES 에 없는 회사나 회사명 미입력 시에는 범용 문구 사용)
 
 사용법
     pip install weasyprint
     python build_pdf.py --company 베스핀글로벌
     python build_pdf.py -c 베스핀글로벌 --only resume cover
     python build_pdf.py -c 다른회사 --out ./dist
-    python build_pdf.py              # 회사명을 대화형으로 입력
+    python build_pdf.py              # 회사명 없이 기본(범용) 문서 생성 -> pdf/default/
 
-출력 위치(기본): <스크립트 폴더>/pdf/<회사명>/장홍준_이력서.pdf
+출력 위치(기본): <스크립트 폴더>/pdf/<회사명 또는 default>/장홍준_이력서.pdf
 PDF만 생성하며 HTML 중간 파일은 저장하지 않습니다.
 """
 from __future__ import annotations
@@ -49,7 +49,7 @@ EXPECTED = {"total": 40, "finance": 12, "public": 8, "enterprise": 24, "react": 
 @dataclass(frozen=True)
 class Target:
     """이번 빌드의 지원 대상. 회사명은 입사지원서 표지 제목과 출력 폴더명에만 사용."""
-    company: str
+    company: str = ""  # 비어 있으면 기본(범용) 모드
 
 
 # ============================================================== 2. CONTENT
@@ -281,7 +281,7 @@ RESUME_ENV = ("AI를 코드 작성 보조와 오류 분석·개선 과정에 활
 COVER_QUOTE = "좋아하는 일을 오래도록 잘하고 싶습니다."
 
 # ---- 자기소개서: 회사별 문구 ----------------------------------------------------
-# 문구 안에서 {company} 는 자동 치환된다(현재 문구에는 사용하지 않음). (조사 문제를 피하려고 '에서/의' 형태로 사용)
+# 문구 안에서 {company} 를 쓰면 회사명으로 치환된다(현재 문구에는 사용하지 않음).
 # COMPANY_PROFILES 에 키(회사명)가 있으면 해당 문구를, 없으면 GENERIC_* 범용 문구를 쓴다.
 # 키: motive_title, motive(지원동기 문단들), goal_title, goal(입사 후 목표 문단들)
 COMPANY_PROFILES: dict[str, dict[str, tuple[str, ...] | str]] = {
@@ -762,7 +762,7 @@ def cover_letter_blocks(t: Target) -> str:
 
 
 def cover_letter_sections(t: Target) -> list[tuple[str, tuple[str, ...]]]:
-    """회사별 프로필이 있으면 사용, 없으면 범용 문구에 회사명을 치환해 구성."""
+    """회사별 프로필이 있으면 사용, 없으면(회사명 미입력 포함) 범용 문구로 구성."""
     prof = COMPANY_PROFILES.get(t.company, {})
     fmt = {"company": t.company}
 
@@ -919,7 +919,7 @@ def doc_application(t: Target) -> str:
     cover = (
         "<div class='cover'>"
         f"<span class='pill'>{esc(ROLE)}</span>"
-        f"<div class='big'>{esc(t.company)} 입사지원서</div>"
+        f"<div class='big'>{esc((t.company + ' ') if t.company else '')}입사지원서</div>"
         f"<div class='sub'>{esc(NAME)} | 이력서 · 자기소개서</div>"
         + kv_table((("성명", f"<b>{esc(NAME)}</b>"), ("핵심 스택", "React, Next.js, TypeScript, Vue, HTML5, CSS3, SCSS Modules, Tailwind CSS, Web Accessibility, i18n"),
                     ("제출 서류", "이력서 (학력 · 경력기술서 · 참여 프로젝트 및 기여도) / 자기소개서"),
@@ -947,45 +947,35 @@ def wrap_page(title: str, footer_label: str, body: str) -> str:
 
 
 # ============================================================== 6. BUILD
+DEFAULT_FOLDER = "default"  # 회사명 미입력 시 출력 폴더명
+
+
 def safe_name(text: str) -> str:
     """파일/폴더명으로 쓸 수 없는 문자를 제거하고 공백은 _ 로 치환."""
     cleaned = re.sub(r'[\\/:*?"<>|\s]+', "_", text).strip("_.")
     return cleaned or "company"
 
 
-def resolve_target(args: argparse.Namespace) -> Target | None:
-    company = (args.company or "").strip()
-    if not company:
-        if not sys.stdin.isatty():
-            print("지원 회사명이 필요합니다: python build_pdf.py --company 회사명", file=sys.stderr)
-            return None
-        company = input("지원 회사명: ").strip()
-        if not company:
-            print("회사명이 비어 있습니다.", file=sys.stderr)
-            return None
-    return Target(company=company)
+def resolve_target(args: argparse.Namespace) -> Target:
+    """회사명이 없으면 빈 값(기본)으로 처리 -> 범용 문구, 표지는 '입사지원서', 폴더는 default."""
+    return Target(company=(args.company or "").strip())
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="이력서/포트폴리오/상세경력기술서/자기소개서/입사지원서 PDF 빌드 (지원 회사별)")
-    ap.add_argument("-c", "--company", help="지원 회사명 (예: 베스핀글로벌). 생략하면 입력 프롬프트 표시")
+    ap.add_argument("-c", "--company", help="지원 회사명 (예: 베스핀글로벌). 생략하면 기본(범용) 문서 생성")
     ap.add_argument("--only", nargs="+", choices=DOCUMENTS.keys(), metavar="DOC",
                     help=f"생성할 문서만 지정 (여러 개 가능): {', '.join(DOCUMENTS)}")
     ap.add_argument(
         "--out", type=Path, default=Path(__file__).resolve().parent / "pdf",
-        help="PDF 출력 폴더 (기본값: 스크립트 폴더/pdf/<회사명>)",
+        help="PDF 출력 폴더 (기본값: 스크립트 폴더/pdf/<회사명 또는 default>)",
     )
     args = ap.parse_args()
 
     target = resolve_target(args)
-    if target is None:
-        return 1
-    if target.company not in COMPANY_PROFILES:
-        print(f"[안내] '{target.company}' 전용 자기소개서 문구가 없어 범용 문구로 생성합니다. "
-              "COMPANY_PROFILES 에 추가하면 회사별 문구를 쓸 수 있습니다.", file=sys.stderr)
 
     check_stats(compute_stats())
-    company_key = safe_name(target.company)
+    company_key = safe_name(target.company) if target.company else DEFAULT_FOLDER
     out_dir = args.out / company_key
     out_dir.mkdir(parents=True, exist_ok=True)
     try:
